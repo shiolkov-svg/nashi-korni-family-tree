@@ -1,0 +1,2694 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="artifact-type" content="dashboard">
+<meta name="design-style" content="broadsheet">
+<title>Родословное древо рода Щёлковых и родственных семей — Семейная хроника</title>
+<link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,500..800;1,400..700&family=Source+Sans+3:wght@400;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&display=swap" rel="stylesheet">
+<script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=UbEqbGlTItXp0d05lbqr-M4VBf1h0ny5JAkAwHNKEE3_4sPIT6gi0e0R9vs6i-6zNHrCdP2lQqbwQBVpaFZKgevQpPM2Kpyp-PPpCeKx2OiZRRNz6Q8NVEKqaJm5yF7OTRdFQ5f4JX2Qzx6jUBmG0zTF-Fas1XBiXmPs8p8bdYRCIFi_CSjzh-cHFrZMnhzoFz56dzA3IxAF0HD0Ufub8xq7njOj4Ycd86XKoB7Y5YvVcIf8CTIMHo038lWNQE0vqjXr8Qn2ekU9ROKCYB8Nk0Xwe0Az7AvTc8XWNQG_YHbRm8G2WhIikkqX5axOG_-SgaNLGOwjJ5LDvKoy8NGuab502aunGlShenwYect79i7X07YR01zvpFojhC76x17k" charset="UTF-8"></script><style>
+:root {
+  color-scheme: light;
+
+  /* 1. Broadsheet Palette & Tokens */
+  --background: #f7f3eb;
+  --surface-container-low: #efe8da;
+  --surface-container: #e6ddcc;
+  --surface-container-high: #ddd2be;
+
+  --on-surface: #1a1817;
+  --on-surface-variant: #4d4845;
+
+  --outline: #33302e;
+  --outline-variant: #cdc3b2;
+
+  --primary: #990f3d;
+  --on-primary: #ffffff;
+  --primary-container: #f4dce2;
+  --on-primary-container: #6b0a2a;
+  --secondary: #0d7680;
+  --tertiary: #0f5499;
+  --error: #b3261e;
+  --on-error: #ffffff;
+
+  --data-1: #990f3d;
+  --data-2: #0d7680;
+  --data-3: #0f5499;
+  --data-4: #9a6312;
+  --data-context: #bfb5a4;
+
+  --font-headline: 'Bitter', Georgia, serif;
+  --font-body: 'Source Serif 4', Georgia, serif;
+  --font-label: 'Source Sans 3', system-ui, sans-serif;
+
+  --rounded: 0px;
+  --rounded-lg: 0px;
+  --rounded-full: 0px;
+
+  --rule-masthead: 3px double var(--on-surface);
+  --rule-ink: 1px solid var(--on-surface);
+  --rule-section: 2px solid var(--outline);
+  --rule-column: 1px solid var(--outline-variant);
+
+  /* 2. Shared Semantic, Focus, Type & Spacing Tokens */
+  --positive: #0d7680;
+  --warning: #9a6312;
+  --focus: #990f3d;
+
+  --display-size: clamp(1.65rem, 1.3rem + 1.6vw, 2.35rem);
+  --headline-size: clamp(1.25rem, 1.1rem + 0.55vw, 1.55rem);
+  --subhead-size: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
+  --body-size: clamp(1rem, 0.96rem + 0.2vw, 1.0625rem);
+  --label-size: 0.75rem;
+
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2.25rem;
+  --space-2xl: 3.25rem;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-micro: 120ms;
+  --dur-short: 220ms;
+  --dur-long: 420ms;
+
+  --tree-canvas-height: clamp(340px, 58vw, 480px);
+}
+
+/* Base Reset (no vh units anywhere for seamless Google Sites iframe embedding) */
+*, *::before, *::after {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+html, body {
+  overflow-x: clip;
+  margin: 0;
+  padding: 0;
+  background-color: var(--background);
+  color: var(--on-surface);
+  font-family: var(--font-body);
+  font-size: var(--body-size);
+  line-height: 1.58;
+  font-optical-sizing: auto;
+  -webkit-text-size-adjust: 100%;
+}
+header { position: static !important; }
+
+button, input, select, textarea {
+  font-family: inherit;
+  touch-action: manipulation;
+}
+
+.page-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-lg);
+  padding: var(--space-md) var(--space-md) var(--space-xl);
+  max-width: 1120px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+.page-grid * { min-width: 0; }
+
+/* Focus Ring */
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+/* Broadsheet Masthead */
+.masthead-line {
+  border-bottom: var(--rule-masthead);
+  padding-bottom: var(--space-sm);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-sm);
+  font-family: var(--font-label);
+  font-weight: 700;
+  font-size: var(--label-size);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--on-surface);
+}
+.masthead-kicker {
+  color: var(--primary);
+}
+.masthead {
+  border-bottom: var(--rule-ink);
+  padding-block: var(--space-md);
+}
+h1 {
+  font-family: var(--font-headline);
+  font-weight: 800;
+  font-size: var(--display-size);
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+  margin: 0 0 var(--space-sm);
+  color: var(--on-surface);
+}
+h2, h3 {
+  font-family: var(--font-headline);
+  font-weight: 700;
+  font-size: var(--headline-size);
+  line-height: 1.15;
+  margin: 0;
+  color: var(--on-surface);
+}
+.lede {
+  font-family: var(--font-body);
+  font-size: var(--subhead-size);
+  color: var(--on-surface-variant);
+  line-height: 1.5;
+  max-width: 64ch;
+  margin: 0;
+}
+
+/* Key Figures Strip (Column Hairlines) */
+.columns {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0;
+  border-bottom: var(--rule-ink);
+  padding-bottom: var(--space-md);
+}
+.kpi-cell {
+  border-left: var(--rule-column);
+  padding: var(--space-xs) var(--space-md);
+  background: transparent;
+}
+.kpi-cell:first-child {
+  border-left: 0;
+  padding-left: 0;
+}
+.kpi-label {
+  font-family: var(--font-label);
+  font-weight: 700;
+  font-size: var(--label-size);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--on-surface-variant);
+  display: block;
+}
+.kpi-value {
+  font-family: var(--font-headline);
+  font-weight: 700;
+  font-size: clamp(1.35rem, 1.15rem + 0.8vw, 1.85rem);
+  font-variant-numeric: lining-nums tabular-nums;
+  line-height: 1.15;
+  margin-top: var(--space-xs);
+  color: var(--on-surface);
+}
+.kpi-note {
+  font-family: var(--font-label);
+  font-weight: 700;
+  font-size: var(--label-size);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--secondary);
+  display: block;
+  margin-top: var(--space-xs);
+}
+
+/* Search & View Controls Bar */
+.controls-bar {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: var(--space-md);
+  align-items: end;
+  padding-bottom: var(--space-md);
+  border-bottom: var(--rule-column);
+}
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+.field-label {
+  font-family: var(--font-label);
+  font-weight: 700;
+  font-size: var(--label-size);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--on-surface);
+}
+.search-row {
+  display: flex;
+  gap: var(--space-sm);
+  align-items: stretch;
+}
+.search-input {
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 48px;
+  padding: var(--space-sm) var(--space-md);
+  border: 1px solid var(--outline);
+  border-radius: var(--rounded);
+  background-color: var(--background);
+  color: var(--on-surface);
+  font-size: 1rem; /* 16px prevents iOS Safari auto-zoom on focus */
+  line-height: 1.3;
+  transition: box-shadow var(--dur-micro) var(--ease-out), background-color var(--dur-micro) var(--ease-out);
+}
+.search-input:focus {
+  border-color: var(--primary);
+  box-shadow: inset 0 0 0 1px var(--primary);
+  outline: none;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  min-height: 48px;
+  min-width: 48px;
+  padding: var(--space-sm) var(--space-md);
+  border: 1px solid var(--outline);
+  border-radius: var(--rounded);
+  background-color: var(--surface-container-low);
+  color: var(--on-surface);
+  font-family: var(--font-label);
+  font-weight: 700;
+  font-size: 0.875rem;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: background-color var(--dur-micro) var(--ease-out), color var(--dur-micro) var(--ease-out);
+}
+.btn:hover {
+  background-color: var(--surface-container-high);
+}
+.btn:active {
+  background-color: var(--surface-container);
+}
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.btn-primary {
+  background-color: var(--primary);
+  border-color: var(--primary);
+  color: var(--on-primary);
+}
+.btn-primary:hover {
+  background-color: var(--on-primary-container);
+  border-color: var(--on-primary-container);
+}
+.btn-active {
+  background-color: var(--on-surface);
+  border-color: var(--on-surface);
+  color: var(--background);
+}
+.btn-active:hover {
+  background-color: var(--outline);
+}
+
+.view-toggle-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+.segmented {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+/* Search Results Drawer (In-Flow) */
+.search-results-box {
+  background-color: var(--surface-container-low);
+  border-top: var(--rule-section);
+  border-bottom: var(--rule-ink);
+  padding: var(--space-md);
+  display: none;
+}
+.search-results-box.is-open {
+  display: block;
+}
+.search-results-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-sm);
+}
+.search-results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+  gap: var(--space-sm);
+}
+.search-hit-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  width: 100%;
+  min-height: 48px;
+  padding: var(--space-sm) var(--space-md);
+  background-color: var(--background);
+  border: 1px solid var(--outline-variant);
+  color: var(--on-surface);
+  cursor: pointer;
+  gap: var(--space-xs);
+  transition: background-color var(--dur-micro) var(--ease-out);
+}
+.search-hit-btn:hover {
+  background-color: var(--primary-container);
+}
+.search-hit-clan {
+  font-family: var(--font-label);
+  font-weight: 700;
+  font-size: var(--label-size);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--primary);
+}
+.search-hit-name {
+  font-family: var(--font-headline);
+  font-weight: 700;
+  font-size: 1rem;
+}
+.search-hit-meta {
+  font-size: 0.875rem;
+  color: var(--on-surface-variant);
+}
+
+/* Clan Selector Strip (Horizontal Touch Rail + Swipe Controls) */
+.clan-nav-section {
+  border-top: var(--rule-section);
+  padding-top: var(--space-sm);
+}
+.clan-nav-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-sm);
+  flex-wrap: wrap;
+}
+.section-label {
+  font-family: var(--font-label);
+  font-weight: 700;
+  font-size: var(--label-size);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--primary);
+}
+.swipe-hint-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+.swipe-hint-text {
+  font-family: var(--font-label);
+  font-size: var(--label-size);
+  color: var(--on-surface-variant);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.clan-rail {
+  display: flex;
+  gap: var(--space-sm);
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: var(--space-sm);
+  scrollbar-width: thin;
+  scrollbar-color: var(--outline-variant) transparent;
+}
+.clan-tab {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  min-height: 52px;
+  padding: var(--space-sm) var(--space-md);
+  border: 1px solid var(--outline-variant);
+  background-color: var(--background);
+  color: var(--on-surface);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  text-align: left;
+  transition: background-color var(--dur-micro) var(--ease-out), box-shadow var(--dur-micro) var(--ease-out);
+}
+.clan-tab:hover {
+  background-color: var(--surface-container-low);
+}
+.clan-tab.is-selected {
+  background-color: var(--on-surface);
+  color: var(--background);
+  border-color: var(--on-surface);
+  box-shadow: inset 0 -3px 0 var(--primary);
+}
+.clan-tab-num {
+  font-family: var(--font-label);
+  font-weight: 700;
+  font-size: var(--label-size);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--primary);
+}
+.clan-tab.is-selected .clan-tab-num {
+  color: var(--primary-container);
+}
+.clan-tab-title {
+  font-family: var(--font-headline);
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1.2;
+}
+
+/* Active Clan Workspace (Swipeable Region) */
+.clan-workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-lg);
+  border-top: var(--rule-ink);
+  padding-top: var(--space-md);
+  transition: opacity var(--dur-short) var(--ease-out);
+}
+.clan-banner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.9fr);
+  gap: var(--space-lg);
+  padding-bottom: var(--space-md);
+  border-bottom: var(--rule-column);
+}
+.tag {
+  font-family: var(--font-label);
+  font-weight: 700;
+  font-size: var(--label-size);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--secondary);
+  background: transparent;
+  padding: 0;
+  display: inline-block;
+  margin-bottom: var(--space-xs);
+}
+.clan-summary {
+  margin: var(--space-sm) 0 0;
+  color: var(--on-surface);
+  max-width: 65ch;
+}
+.clan-meta-col {
+  border-left: var(--rule-column);
+  padding-left: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+.meta-pair-label {
+  font-family: var(--font-label);
+  font-weight: 700;
+  font-size: var(--label-size);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--on-surface-variant);
+  display: block;
+}
+.meta-pair-val {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--on-surface);
+}
+
+/* Interactive Tree Canvas + Controls */
+.tree-shell {
+  border: 1px solid var(--outline);
+  background-color: var(--background);
+  display: flex;
+  flex-direction: column;
+}
+.tree-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  background-color: var(--surface-container-low);
+  border-bottom: var(--rule-ink);
+}
+.tree-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  align-items: center;
+  font-family: var(--font-label);
+  font-size: var(--label-size);
+  font-weight: 600;
+  color: var(--on-surface);
+}
+.legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+.legend-swatch {
+  width: 14px;
+  height: 4px;
+  display: inline-block;
+}
+.swatch-direct { background-color: var(--primary); }
+.swatch-link { background-color: var(--secondary); }
+.swatch-recon { background-color: var(--tertiary); }
+
+.zoom-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+.zoom-readout {
+  font-family: var(--font-label);
+  font-weight: 700;
+  font-size: var(--label-size);
+  font-variant-numeric: tabular-nums;
+  min-width: 44px;
+  text-align: center;
+}
+.tree-viewport {
+  position: relative;
+  width: 100%;
+  height: var(--tree-canvas-height);
+  min-height: 320px;
+  overflow: hidden;
+  touch-action: none; /* Enables 1-finger pan and 2-finger pinch inside SVG canvas */
+  background-color: var(--background);
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.tree-viewport:active {
+  cursor: grabbing;
+}
+.tree-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+.tree-gesture-footer {
+  padding: var(--space-xs) var(--space-md);
+  border-top: var(--rule-column);
+  background-color: var(--background);
+  font-family: var(--font-label);
+  font-size: var(--label-size);
+  color: var(--on-surface-variant);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+/* SVG Node Styles */
+.svg-node {
+  cursor: pointer;
+}
+.svg-node-box {
+  fill: var(--background);
+  stroke: var(--outline);
+  stroke-width: 1.25;
+  transition: fill var(--dur-micro) var(--ease-out);
+}
+.svg-node:hover .svg-node-box {
+  fill: var(--surface-container-low);
+}
+.svg-node.is-selected .svg-node-box {
+  fill: var(--primary-container);
+  stroke: var(--primary);
+  stroke-width: 2.25;
+}
+.svg-node-title {
+  font-family: var(--font-headline);
+  font-weight: 700;
+  font-size: 13px;
+  fill: var(--on-surface);
+}
+.svg-node-sub {
+  font-family: var(--font-label);
+  font-weight: 600;
+  font-size: 11px;
+  fill: var(--on-surface-variant);
+}
+.svg-node-gen {
+  font-family: var(--font-label);
+  font-weight: 700;
+  font-size: 10px;
+  fill: var(--primary);
+  text-transform: uppercase;
+}
+.svg-edge {
+  fill: none;
+  stroke: var(--outline);
+  stroke-width: 1.5;
+}
+.svg-edge-dashed {
+  fill: none;
+  stroke: var(--secondary);
+  stroke-width: 1.75;
+  stroke-dasharray: 5 4;
+}
+
+/* Generation List View (Mobile-Optimized Touch Cards) */
+.generation-list-view {
+  display: none;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+.generation-list-view.is-visible {
+  display: flex;
+}
+.tree-shell.is-hidden {
+  display: none;
+}
+.gen-group {
+  border-top: var(--rule-section);
+  padding-top: var(--space-sm);
+}
+.gen-group-title {
+  font-family: var(--font-label);
+  font-weight: 700;
+  font-size: var(--label-size);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--primary);
+  margin-bottom: var(--space-sm);
+}
+.gen-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+  gap: var(--space-sm);
+}
+.person-card-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  width: 100%;
+  min-height: 64px;
+  padding: var(--space-md);
+  background-color: var(--background);
+  border: 1px solid var(--outline-variant);
+  border-top: 3px solid var(--primary);
+  color: var(--on-surface);
+  cursor: pointer;
+  gap: var(--space-xs);
+  transition: background-color var(--dur-micro) var(--ease-out);
+}
+.person-card-btn.kind-link {
+  border-top-color: var(--secondary);
+}
+.person-card-btn.kind-recon {
+  border-top-color: var(--tertiary);
+}
+.person-card-btn:hover {
+  background-color: var(--surface-container-low);
+}
+.person-card-btn.is-selected {
+  background-color: var(--primary-container);
+  border-color: var(--primary);
+}
+.person-card-name {
+  font-family: var(--font-headline);
+  font-weight: 700;
+  font-size: 1.05rem;
+  line-height: 1.25;
+}
+.person-card-years {
+  font-family: var(--font-label);
+  font-weight: 700;
+  font-size: var(--label-size);
+  color: var(--on-surface-variant);
+  font-variant-numeric: tabular-nums;
+}
+.person-card-role {
+  font-size: 0.9rem;
+  color: var(--on-surface-variant);
+  line-height: 1.4;
+}
+
+/* Contextual Dossier Panel (In-Flow Spatial Contiguity) */
+.dossier-panel {
+  border-top: var(--rule-section);
+  border-bottom: var(--rule-ink);
+  background-color: var(--surface-container-low);
+  padding: var(--space-lg);
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: var(--space-lg);
+}
+.dossier-header-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-sm);
+}
+.dossier-status {
+  font-family: var(--font-label);
+  font-weight: 700;
+  font-size: var(--label-size);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--primary);
+}
+.dossier-years {
+  font-family: var(--font-headline);
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--on-surface-variant);
+  font-variant-numeric: tabular-nums;
+  margin-top: var(--space-xs);
+}
+.dossier-bio {
+  margin: var(--space-md) 0;
+  line-height: 1.62;
+  max-width: 64ch;
+}
+.dossier-fact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
+  gap: var(--space-md);
+  border-top: var(--rule-column);
+  padding-top: var(--space-md);
+}
+.dossier-relations {
+  border-left: var(--rule-column);
+  padding-left: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+.relation-group-label {
+  font-family: var(--font-label);
+  font-weight: 700;
+  font-size: var(--label-size);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--on-surface-variant);
+  margin-bottom: var(--space-xs);
+  display: block;
+}
+.relation-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+.relation-btn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-sm);
+  width: 100%;
+  min-height: 48px;
+  padding: var(--space-sm) var(--space-md);
+  background-color: var(--background);
+  border: 1px solid var(--outline);
+  color: var(--on-surface);
+  text-align: left;
+  cursor: pointer;
+  font-size: 0.92rem;
+  font-weight: 600;
+  transition: background-color var(--dur-micro) var(--ease-out);
+}
+.relation-btn:hover {
+  background-color: var(--primary-container);
+}
+.relation-tag {
+  font-family: var(--font-label);
+  font-weight: 700;
+  font-size: var(--label-size);
+  text-transform: uppercase;
+  color: var(--primary);
+  flex-shrink: 0;
+}
+.dossier-pager {
+  display: flex;
+  gap: var(--space-sm);
+  margin-top: auto;
+  padding-top: var(--space-sm);
+}
+.dossier-pager .btn {
+  flex: 1 1 0;
+}
+
+/* Regional Geography & Inter-Clan Bridges */
+.geo-section {
+  border-top: var(--rule-section);
+  padding-top: var(--space-md);
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: var(--space-lg);
+}
+.geo-map-box {
+  border: 1px solid var(--outline);
+  background-color: var(--background);
+  padding: var(--space-md);
+}
+.geo-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.geo-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+.geo-node-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  width: 100%;
+  min-height: 52px;
+  padding: var(--space-sm) var(--space-md);
+  background-color: var(--background);
+  border: 1px solid var(--outline-variant);
+  cursor: pointer;
+  gap: var(--space-xs);
+}
+.geo-node-btn:hover,
+.geo-node-btn.is-active {
+  background-color: var(--surface-container-low);
+  border-color: var(--primary);
+}
+
+/* Editorial Methodology Footer */
+.chronicle-footer {
+  border-top: var(--rule-masthead);
+  padding-top: var(--space-md);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+  gap: var(--space-lg);
+  font-size: 0.92rem;
+  color: var(--on-surface-variant);
+}
+.footer-heading {
+  font-family: var(--font-label);
+  font-weight: 700;
+  font-size: var(--label-size);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--on-surface);
+  margin: 0 0 var(--space-xs);
+}
+
+/* Mobile & Tablet Breakpoints */
+@media (max-width: 820px) {
+  .clan-banner,
+  .dossier-panel,
+  .geo-section {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .clan-meta-col,
+  .dossier-relations {
+    border-left: 0;
+    border-top: var(--rule-column);
+    padding-left: 0;
+    padding-top: var(--space-md);
+  }
+}
+
+@media (max-width: 640px) {
+  .page-grid {
+    padding: var(--space-sm) var(--space-sm) var(--space-xl);
+    gap: var(--space-md);
+  }
+  .columns {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: var(--space-sm);
+  }
+  .kpi-cell:nth-child(odd) {
+    border-left: 0;
+    padding-left: 0;
+  }
+  .controls-bar {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .segmented .btn {
+    flex: 1 1 0;
+  }
+  .dossier-panel {
+    padding: var(--space-md);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+</style>
+</head>
+<body>
+<main class="page-grid" id="app-root">
+  <!-- Broadsheet Masthead -->
+  <header>
+    <div class="masthead-line">
+      <span class="masthead-kicker">Семейная хроника в истории России · Архивный модуль</span>
+      <span>nashi-korni.ru · Москва 2026</span>
+    </div>
+    <div class="masthead">
+      <h1>Родословное древо рода Щёлковых и родственных семей</h1>
+      <p class="lede">
+        Интерактивный путеводитель по семи родам из книги В. Ю. Щёлкова «Сквозь века и судьбы»:
+        документальные линии поколений, брачные союзы и география от Яицкого казачьего войска
+        и Самарского Заволжья до Псковщины.
+      </p>
+    </div>
+
+    <div class="columns" aria-label="Ключевые показатели хроники">
+      <div class="kpi-cell">
+        <span class="kpi-label">Основных родов</span>
+        <div class="kpi-value">7</div>
+        <span class="kpi-note">Разделы I–VII</span>
+      </div>
+      <div class="kpi-cell">
+        <span class="kpi-label">Глубина поиска</span>
+        <div class="kpi-value">XVIII–XXI</div>
+        <span class="kpi-note">9 поколений</span>
+      </div>
+      <div class="kpi-cell">
+        <span class="kpi-label">Ключевые узлы</span>
+        <div class="kpi-value">3 региона</div>
+        <span class="kpi-note">Урал · Заволжье · Псков</span>
+      </div>
+      <div class="kpi-cell">
+        <span class="kpi-label">Источниковая база</span>
+        <div class="kpi-value">343 с.</div>
+        <span class="kpi-note">Ревизии и метрики</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Search & View Mode Controls -->
+  <section class="controls-bar" aria-label="Поиск и переключение режима просмотра">
+    <div class="field-group">
+      <label class="field-label" for="genealogy-search">Поиск по имени, фамилии, месту или документу</label>
+      <div class="search-row">
+        <input
+          id="genealogy-search"
+          class="search-input"
+          type="search"
+          autocomplete="off"
+          placeholder="Например: Фома, Грязной Умёт, Устинов, 1782…"
+          oninput="handleSearchInput(this.value)"
+        >
+        <button type="button" class="btn" id="clear-search-btn" onclick="clearSearch()" aria-label="Очистить поиск">
+          Сбросить
+        </button>
+      </div>
+    </div>
+
+    <div class="view-toggle-group">
+      <span class="field-label">Режим на экране</span>
+      <div class="segmented" role="group" aria-label="Выбор вида отображения древа">
+        <button type="button" class="btn btn-active" id="btn-mode-tree" onclick="setViewMode('tree')" aria-pressed="true">
+          Схема древа
+        </button>
+        <button type="button" class="btn" id="btn-mode-list" onclick="setViewMode('list')" aria-pressed="false">
+          Поколения
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- In-Flow Search Results -->
+  <section class="search-results-box" id="search-results-box" aria-live="polite">
+    <div class="search-results-head">
+      <span class="section-label" id="search-results-count">Найдено записей: 0</span>
+      <button type="button" class="btn" onclick="clearSearch()">Закрыть</button>
+    </div>
+    <div class="search-results-grid" id="search-results-grid"></div>
+  </section>
+
+  <!-- Clan Selector Rail (Touch Horizontal Scroll + Swipe Buttons) -->
+  <section class="clan-nav-section" aria-label="Выбор рода и межродовой панорамы">
+    <div class="clan-nav-header">
+      <span class="section-label">Роды и линии хроники (1–7 + сводная схема)</span>
+      <div class="swipe-hint-controls">
+        <span class="swipe-hint-text">Свайп влево/вправо</span>
+        <button type="button" class="btn" id="prev-clan-btn" onclick="stepClan(-1)" aria-label="Предыдущий род">
+          ←
+        </button>
+        <button type="button" class="btn" id="next-clan-btn" onclick="stepClan(1)" aria-label="Следующий род">
+          →
+        </button>
+      </div>
+    </div>
+    <div class="clan-rail" id="clan-rail" role="tablist" aria-label="Переключатель родов"></div>
+  </section>
+
+  <!-- Swipeable Clan Workspace -->
+  <section class="clan-workspace" id="clan-workspace" aria-live="polite">
+    <div class="clan-banner">
+      <div>
+        <span class="tag" id="clan-tag">Раздел I</span>
+        <h2 id="clan-title">Род Щёлоковых</h2>
+        <p class="clan-summary" id="clan-summary"></p>
+      </div>
+      <div class="clan-meta-col">
+        <div>
+          <span class="meta-pair-label">География и станицы</span>
+          <span class="meta-pair-val" id="clan-geography"></span>
+        </div>
+        <div>
+          <span class="meta-pair-label">Архивные источники</span>
+          <span class="meta-pair-val" id="clan-sources"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Interactive Vector Tree Canvas -->
+    <div class="tree-shell" id="tree-shell">
+      <div class="tree-toolbar">
+        <div class="tree-legend" aria-label="Условные обозначения древа">
+          <span class="legend-item"><span class="legend-swatch swatch-direct"></span>Прямая линия</span>
+          <span class="legend-item"><span class="legend-swatch swatch-link"></span>Брачный / родственный союз</span>
+          <span class="legend-item"><span class="legend-swatch swatch-recon"></span>По отчеству / архиву</span>
+        </div>
+        <div class="zoom-controls" aria-label="Масштаб схемы древа">
+          <button type="button" class="btn" onclick="adjustZoom(-0.2)" aria-label="Уменьшить масштаб">−</button>
+          <span class="zoom-readout" id="zoom-readout">100%</span>
+          <button type="button" class="btn" onclick="adjustZoom(0.2)" aria-label="Увеличить масштаб">+</button>
+          <button type="button" class="btn" onclick="resetViewport()" aria-label="Сбросить положение схемы">Центр</button>
+        </div>
+      </div>
+
+      <div class="tree-viewport" id="tree-viewport" role="region" aria-label="Интерактивное генеалогическое древо">
+        <svg class="tree-svg" id="tree-svg" xmlns="http://www.w3.org/2000/svg">
+          <g id="tree-pan-group"></g>
+        </svg>
+      </div>
+
+      <div class="tree-gesture-footer">
+        <span>Жесты: 1 палец — перемещение схемы · 2 пальца — масштаб · тап по карточке — досье</span>
+        <span id="tree-node-count">Узлов в ветви: 0</span>
+      </div>
+    </div>
+
+    <!-- Mobile Touch List of Generations -->
+    <div class="generation-list-view" id="generation-list-view" aria-label="Поколенная роспись"></div>
+
+    <!-- Contextual Person Dossier (Always In-Flow Below Tree/List) -->
+    <article class="dossier-panel" id="dossier-panel" aria-label="Биографическая карточка выбранного представителя">
+      <div>
+        <div class="dossier-header-row">
+          <div>
+            <span class="dossier-status" id="dossier-status">Документально подтверждено</span>
+            <h3 id="dossier-name">Выберите узел на схеме</h3>
+            <div class="dossier-years" id="dossier-years"></div>
+          </div>
+          <span class="tag" id="dossier-gen">Поколение</span>
+        </div>
+
+        <p class="dossier-bio" id="dossier-bio"></p>
+
+        <div class="dossier-fact-grid">
+          <div>
+            <span class="meta-pair-label">Локализация</span>
+            <span class="meta-pair-val" id="dossier-place"></span>
+          </div>
+          <div>
+            <span class="meta-pair-label">Источник и сноска</span>
+            <span class="meta-pair-val" id="dossier-source"></span>
+          </div>
+        </div>
+      </div>
+
+      <aside class="dossier-relations" aria-label="Родственные переходы">
+        <div>
+          <span class="relation-group-label">Связи и переходы</span>
+          <div class="relation-buttons" id="dossier-relations-list"></div>
+        </div>
+        <div class="dossier-pager">
+          <button type="button" class="btn" id="prev-node-btn" onclick="stepNode(-1)">← Пред. лицо</button>
+          <button type="button" class="btn" id="next-node-btn" onclick="stepNode(1)">След. лицо →</button>
+        </div>
+      </aside>
+    </article>
+  </section>
+
+  <!-- Vector Geographic Synthesis (Zero Raster Tiles) -->
+  <section class="geo-section" aria-label="Географический указатель семи родов">
+    <div class="geo-map-box">
+      <span class="section-label">Географическая ось хроники (векторная схема)</span>
+      <h2 style="margin-top: var(--space-xs); margin-bottom: var(--space-sm);">Три узла семейной истории</h2>
+      <svg class="geo-svg" viewBox="0 0 600 250" xmlns="http://www.w3.org/2000/svg" aria-label="Схема географических связей: Псковщина, Самарское Заволжье, Южный Урал">
+        <rect x="0" y="0" width="600" height="250" fill="var(--surface-container-low)" stroke="var(--outline-variant)" stroke-width="1"/>
+        <!-- Grid hairlines -->
+        <line x1="0" y1="83" x2="600" y2="83" stroke="var(--outline-variant)" stroke-width="0.75" stroke-dasharray="3 3"/>
+        <line x1="0" y1="166" x2="600" y2="166" stroke="var(--outline-variant)" stroke-width="0.75" stroke-dasharray="3 3"/>
+        <line x1="200" y1="0" x2="200" y2="250" stroke="var(--outline-variant)" stroke-width="0.75" stroke-dasharray="3 3"/>
+        <line x1="400" y1="0" x2="400" y2="250" stroke="var(--outline-variant)" stroke-width="0.75" stroke-dasharray="3 3"/>
+
+        <!-- Migration / Marriage Routes -->
+        <path d="M 95 75 Q 230 120 325 145" fill="none" stroke="var(--secondary)" stroke-width="2" stroke-dasharray="5 4"/>
+        <path d="M 325 145 Q 410 155 485 128" fill="none" stroke="var(--primary)" stroke-width="2.25"/>
+        <path d="M 95 75 Q 290 50 485 128" fill="none" stroke="var(--tertiary)" stroke-width="1.5" stroke-dasharray="4 4"/>
+
+        <!-- Node 1: Pskov -->
+        <g onclick="focusGeoRegion('pskov')" style="cursor:pointer;">
+          <circle cx="95" cy="75" r="10" fill="var(--secondary)" stroke="var(--on-surface)" stroke-width="1.5"/>
+          <text x="95" y="54" text-anchor="middle" font-family="Bitter, serif" font-weight="700" font-size="13" fill="var(--on-surface)">Псковщина</text>
+          <text x="95" y="102" text-anchor="middle" font-family="Source Sans 3, sans-serif" font-weight="600" font-size="11" fill="var(--on-surface-variant)">Семёновы · Алексеевы</text>
+        </g>
+
+        <!-- Node 2: Zavolzhye -->
+        <g onclick="focusGeoRegion('zavolzhye')" style="cursor:pointer;">
+          <circle cx="325" cy="145" r="10" fill="var(--tertiary)" stroke="var(--on-surface)" stroke-width="1.5"/>
+          <text x="325" y="124" text-anchor="middle" font-family="Bitter, serif" font-weight="700" font-size="13" fill="var(--on-surface)">Заволжье</text>
+          <text x="325" y="172" text-anchor="middle" font-family="Source Sans 3, sans-serif" font-weight="600" font-size="11" fill="var(--on-surface-variant)">Устиновы · Алексеевы</text>
+          <text x="325" y="187" text-anchor="middle" font-family="Source Sans 3, sans-serif" font-size="10" fill="var(--on-surface-variant)">Николаевский и Бузулукский у.</text>
+        </g>
+
+        <!-- Node 3: South Ural -->
+        <g onclick="focusGeoRegion('ural')" style="cursor:pointer;">
+          <circle cx="485" cy="128" r="12" fill="var(--primary)" stroke="var(--on-surface)" stroke-width="1.5"/>
+          <text x="485" y="104" text-anchor="middle" font-family="Bitter, serif" font-weight="700" font-size="13" fill="var(--on-surface)">Южный Урал</text>
+          <text x="485" y="156" text-anchor="middle" font-family="Source Sans 3, sans-serif" font-weight="600" font-size="11" fill="var(--on-surface-variant)">Щёлоковы · Причаганье</text>
+          <text x="485" y="171" text-anchor="middle" font-family="Source Sans 3, sans-serif" font-size="10" fill="var(--on-surface-variant)">Грязной Умёт / пос. Ленинский</text>
+        </g>
+      </svg>
+    </div>
+
+    <div class="geo-list" aria-label="Быстрый переход по регионам хроники">
+      <span class="section-label">Переход к ветвям по географии</span>
+      <button type="button" class="geo-node-btn" id="geo-btn-ural" onclick="focusGeoRegion('ural')">
+        <span class="clan-tab-num">Южный Урал и Причаганье (51.939° N, 51.383° E)</span>
+        <span class="person-card-name">Яицкое и Уральское казачье войско · Грязной Умёт</span>
+        <span class="person-card-role">Род Щёлоковых (XVIII–XX вв.), Соболевская станица, Пророко-Ильинский храм (52.245° N, 51.533° E), совхоз «Ленинский».</span>
+      </button>
+      <button type="button" class="geo-node-btn" id="geo-btn-zavolzhye" onclick="focusGeoRegion('zavolzhye')">
+        <span class="clan-tab-num">Самарское и Оренбургское Заволжье</span>
+        <span class="person-card-name">Николаевский и Бузулукский уезды · д. Ветошки</span>
+        <span class="person-card-role">Род Устиновых (с. Дергуновка, с. Украинка, х. Плаксин) и заволжский этап пути рода Алексеевых.</span>
+      </button>
+      <button type="button" class="geo-node-btn" id="geo-btn-pskov" onclick="focusGeoRegion('pskov')">
+        <span class="clan-tab-num">Северо-Запад России (Псковщина)</span>
+        <span class="person-card-name">Псковская земля и переселенческие пути на Восток</span>
+        <span class="person-card-role">Род Семёновых (Лилия Павловна Семёнова — союз со Щёлковыми ок. 1963 г.) и истоки рода Алексеевых.</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- Editorial & Archival Integrity Footer -->
+  <footer class="chronicle-footer">
+    <div>
+      <h4 class="footer-heading">О документальной достоверности</h4>
+      <p style="margin: 0;">
+        Все имена, даты и географические названия приведены в строгом соответствии с материалами книги
+        В. Ю. Щёлкова «Сквозь века и судьбы. Семейная хроника в истории России» (Москва, 2026).
+        Сведения, восстановленные по отчествам, устной памяти или историческому контексту, отмечены отдельно.
+      </p>
+    </div>
+    <div>
+      <h4 class="footer-heading">Родственные ветви в Приложениях и Ономастиконе</h4>
+      <p style="margin: 0;">
+        В книге также рассмотрены боковые и родственные линии, включая фамилию Перепёлкиных (Ульяна Яковлевна,
+        Михаил Фомич, Людмила Ивановна Перепёлкины) и ономастическую справку о фамилии Толкачёвых
+        (исторические упоминания 1495 и 1604 гг. приведены как справочный материал, без утверждения кровного родства).
+      </p>
+    </div>
+    <div>
+      <h4 class="footer-heading">Основные архивы и периодические источники</h4>
+      <p style="margin: 0;">
+        РГАДА, РГВИА, РГИА, ревизские сказки ЯКВ (1765–1773 гг.), метрические книги (МК),
+        «Уральские войсковые ведомости» (1894), «Оренбургские епархиальные ведомости» (1905),
+        «Советский спорт» и «Лёгкая атлетика» (1967–1968), семейный архив Щёлковых.
+      </p>
+    </div>
+  </footer>
+</main>
+
+<script>
+// Genealogical dataset grounded strictly in the book excerpts and pre-press review
+const CLANS = [
+  {
+    id: `overview`,
+    tabNum: `Сводная`,
+    tabTitle: `7 родов хроники`,
+    sectionTag: `Структура книги · Части I–II`,
+    title: `Сводная панорама семи родов`,
+    summary: `Общая архитектурная карта исследования: семь родовых историй (Щёлоковы, Устиновы, Семёновы, Домнины, Неверовы, Суровикины, Алексеевы), объединённых документальным поиском от XVIII века до наших дней.`,
+    geography: `Южный Урал (Причаганье, Оренбуржье) · Самарское Заволжье · Псковщина`,
+    sources: `Ревизские сказки, метрические книги, периодическая печать, биографические карточки Приложения (стр. 278–286).`,
+    defaultNodeId: `ov-shchelokov`,
+    nodes: [
+      {
+        id: `ov-shchelokov`,
+        clanJump: `shchelokovy`,
+        name: `I. Род Щёлоковых`,
+        years: `XVIII–XXI вв.`,
+        gen: `Раздел I · стр. 15–120`,
+        kind: `direct`,
+        status: `Документальная линия (9 поколений)`,
+        place: `Яицкое/Уральское КВ, пос. Грязной Умёт (Ленинский)`,
+        source: `Ревизии ЯКВ 1765–1773 гг., МК, пресса 1894–1968 гг.`,
+        bio: `Отцовская линия автора хроники. Прослеживается от первых казачьих дозоров на рубежах Яика и станичных сходов в Грязном Умёте до фронтовиков, учителей, организаторов олимпийского спорта и исследователей рода.`,
+        x: 60, y: 20,
+        parents: [],
+        children: [`ov-author`],
+        links: [{ targetId: `ov-semenov`, label: `Брак ок. 1963 г.` }]
+      },
+      {
+        id: `ov-ustinov`,
+        clanJump: `ustinovy`,
+        name: `II. Род Устиновых`,
+        years: `XIX–XX вв.`,
+        gen: `Раздел II · стр. 123–150`,
+        kind: `direct`,
+        status: `Документальная линия (Главы 1–4)`,
+        place: `Николаевский уезд: с. Дергуновка, с. Украинка, х. Плаксин`,
+        source: `Ревизские сказки, МК о браках и рождениях, карта уезда`,
+        bio: `Заволжская ветвь хроники. Восстановлена от Марка и Михаила Марковича Устиновых через Григория, Николая и Ивана к Алексею Ивановичу, прошедшему австро-венгерский фронт и плен в 1915 г.`,
+        x: 310, y: 20,
+        parents: [],
+        children: [`ov-author`],
+        links: []
+      },
+      {
+        id: `ov-semenov`,
+        clanJump: `semenovy`,
+        name: `III. Род Семёновых`,
+        years: `XX в.`,
+        gen: `Раздел III`,
+        kind: `link`,
+        status: `Документальный союз со Щёлоковыми`,
+        place: `Псковская область → пос. Ленинский (Оренбуржье)`,
+        source: `Семейные свидетельства, биографические карточки`,
+        bio: `Линия родом с Псковщины. Около 1963 года Лилия Павловна Семёнова вышла замуж за Николая Ивановича Щёлкова, соединив северо-западную и южноуральскую ветви семьи.`,
+        x: 560, y: 20,
+        parents: [],
+        children: [`ov-author`],
+        links: [{ targetId: `ov-shchelokov`, label: `Союз линий (1963)` }]
+      },
+      {
+        id: `ov-domnin`,
+        clanJump: `domniny`,
+        name: `IV. Род Домниных`,
+        years: `XVIII–XX вв.`,
+        gen: `Раздел IV · стр. 207`,
+        kind: `recon`,
+        status: `Метрические книги и Приложение`,
+        place: `По материалам архивных приходов книги`,
+        source: `Шмуцтитул стр. 207, МК стр. 211, 214, карточки стр. 278–286`,
+        bio: `Четвёртый род хроники. В исследовательской части подтверждён выкопировками из метрических книг о венчаниях и рождениях, сведёнными в биографические карточки Приложения.`,
+        x: 60, y: 145,
+        parents: [],
+        children: [`ov-author`],
+        links: []
+      },
+      {
+        id: `ov-neverov`,
+        clanJump: `neverovy`,
+        name: `V. Род Неверовых`,
+        years: `с 1782 г.`,
+        gen: `Раздел V · стр. 233–238`,
+        kind: `recon`,
+        status: `Поколенная схема от 1782 г.`,
+        place: `Архивный округ по метрикам и схемам`,
+        source: `Поколенная схема стр. 235 (от Селиверста Демидовича), МК стр. 238`,
+        bio: `Родовая ветвь с сохранившейся поколенной схемой, восходящей к Селиверсту Демидовичу Неверову (род. 1782), и вычищенными архивными выкопировками метрических записей.`,
+        x: 310, y: 145,
+        parents: [],
+        children: [`ov-author`],
+        links: []
+      },
+      {
+        id: `ov-surovikin`,
+        clanJump: `surovikiny`,
+        name: `VI. Род Суровикиных`,
+        years: `XVIII–XX вв.`,
+        gen: `Раздел VI · стр. 247`,
+        kind: `recon`,
+        status: `Раздел VI и биографические карточки`,
+        place: `По материалам Приложения`,
+        source: `Шмуцтитул стр. 247, биографические карточки стр. 278–286`,
+        bio: `Шестая родословная история книги «Сквозь века и судьбы», включённая в единый свод семейных линий и картотеку Приложения.`,
+        x: 560, y: 145,
+        parents: [],
+        children: [`ov-author`],
+        links: []
+      },
+      {
+        id: `ov-alekseev`,
+        clanJump: `alekseevy`,
+        name: `VII. Род Алексеевых`,
+        years: `XIX–XX вв.`,
+        gen: `Раздел VII · стр. 251–277`,
+        kind: `recon`,
+        status: `Завершающий раздел Части I`,
+        place: `Псковщина — Бузулукский уезд (д. Ветошки) — Оренбуржье`,
+        source: `Ревизии, метрики д. Ветошки (стр. 264–266), карточки Приложения`,
+        bio: `Завершает нарративный корпус Части I. Псковско-заволжский путь рода Алексеевых сводит воедино главные географические узлы всей семейной хроники.`,
+        x: 810, y: 82,
+        parents: [],
+        children: [`ov-author`],
+        links: []
+      },
+      {
+        id: `ov-author`,
+        clanJump: `shchelokovy`,
+        name: `Хроника В. Ю. Щёлкова`,
+        years: `Москва · 2026`,
+        gen: `Итог исследования`,
+        kind: `direct`,
+        status: `343 страницы · Части I и II`,
+        place: `Объединяет архивы РГАДА, РГВИА, РГИА и семейные фото`,
+        source: `Книга «Сквозь века и судьбы. Семейная хроника в истории России»`,
+        bio: `Многолетний исследовательский труд Владимира Юрьевича Щёлкова, соединивший родословные росписи семи семей, карты, периодическую печать XIX–XX вв. и личные свидетельства потомков.`,
+        x: 435, y: 270,
+        parents: [`ov-shchelokov`, `ov-ustinov`, `ov-semenov`, `ov-domnin`, `ov-neverov`, `ov-surovikin`, `ov-alekseev`],
+        children: [],
+        links: []
+      }
+    ]
+  },
+  {
+    id: `shchelokovy`,
+    tabNum: `Род I`,
+    tabTitle: `Щёлоковы`,
+    sectionTag: `Раздел I · стр. 15–120`,
+    title: `Род Щёлоковых (уральские казаки Причаганья)`,
+    summary: `Центральная отцовская линия хроники: от первых поколений Яицкого казачьего войска и общинных «плавней» в Грязном Умёте до строительства храма и школы, Гражданской войны, трудовых лет в совхозе «Ленинский» и вершин советского олимпийского спорта.`,
+    geography: `Яик / р. Урал, Соболевская станица, пос. Грязной Умёт (ныне пос. Ленинский Оренбургской обл.)`,
+    sources: `Ревизские сказки ЯКВ 1765–1773 гг., «Уральские войсковые ведомости» (1894), «Оренбургские епархиальные ведомости» (1905), «Советский спорт» (1967–1968).`,
+    defaultNodeId: `sh-foma`,
+    nodes: [
+      {
+        id: `sh-trofim`,
+        name: `Трофим и Семён (ранние колена)`,
+        years: `1-я пол. XVIII в.`,
+        gen: `Поколение I`,
+        kind: `recon`,
+        status: `Исторический рубеж документов`,
+        place: `Земли Яицкого казачьего войска`,
+        source: `Глава 1 «До Трофима», ревизские сказки 1765–1773 гг.`,
+        bio: `Граница документальной памяти рода проходит по первой половине XVIII века. В источниках книги упоминается рубеж «до Трофима» и казак Семён, чьи зрелые годы пришлись на время реформ Яицкого войска, отстаивания старых обычаев и решений Войскового круга.`,
+        x: 80, y: 20,
+        parents: [],
+        children: [`sh-andrey`],
+        links: []
+      },
+      {
+        id: `sh-andrey`,
+        name: `Андрей Щёлоков`,
+        years: `XVIII век`,
+        gen: `Поколение II`,
+        kind: `recon`,
+        status: `Установлен по отчеству сына`,
+        place: `Южный Урал, Яицкое казачье войско`,
+        source: `Восстановлено по отчеству Исаакия Андреевича`,
+        bio: `Промежуточное звено ранних поколений, известное по патрониму следующего задокументированного представителя рода — Исаакия Андреевича.`,
+        x: 340, y: 20,
+        parents: [`sh-trofim`],
+        children: [`sh-isaakiy`],
+        links: []
+      },
+      {
+        id: `sh-isaakiy`,
+        name: `Исаакий Андреевич Щёлоков`,
+        years: `кон. XVIII — нач. XIX в.`,
+        gen: `Поколение III`,
+        kind: `direct`,
+        status: `Документально подтверждено`,
+        place: `Пос. Грязной Умёт (~36 вёрст от прежнего жилья)`,
+        source: `Глава о становлении линии в Грязном Умёте`,
+        bio: `Закрепился с супругой Анисьей в Грязном Умёте, где воспитал четверых детей. Участвовал в местных станичных сходах, распределении пастбищ, сенокосов и регламентированных общинных рыбных ловов («плавней») на реке Урал.`,
+        x: 600, y: 20,
+        parents: [`sh-andrey`],
+        children: [`sh-grigoriy`],
+        links: []
+      },
+      {
+        id: `sh-grigoriy`,
+        name: `Григорий Исаакович Щёлоков`,
+        years: `первая пол. XIX в.`,
+        gen: `Поколение IV`,
+        kind: `direct`,
+        status: `Подтверждён в архивных записях`,
+        place: `Соболевская станица, пос. Грязновский`,
+        source: `Архивные документы, упоминание перед Главой 6`,
+        bio: `Имя сохранилось в нескольких архивных документах. С его сына Фомы Григорьевича архивная картина рода становится отчётливой и подробной, раскрывая состав семей и быт казачьей общины.`,
+        x: 80, y: 145,
+        parents: [`sh-isaakiy`],
+        children: [`sh-foma`],
+        links: []
+      },
+      {
+        id: `sh-foma`,
+        name: `Фома Григорьевич Щёлоков`,
+        years: `ок. 1835 — после 1914`,
+        gen: `Поколение V · Глава 6`,
+        kind: `direct`,
+        status: `Документально подтверждено (пресса и МК)`,
+        place: `Пос. Грязновский Уральской обл. (52.245° N, 51.533° E)`,
+        source: `Оренбургские епархиальные ведомости, 1905, № 4 от 15 февраля (Рис. 126)`,
+        bio: `Казак и церковный староста Пророко-Ильинской церкви пос. Грязновского. В феврале 1905 г. получил Архипастырское благословение Епископа Иоакима за заботы о благоукрашении построенного им же храма, личные пожертвования и старания по постройке школьного здания.`,
+        x: 340, y: 145,
+        parents: [`sh-grigoriy`],
+        children: [`sh-ivan`],
+        links: []
+      },
+      {
+        id: `sh-ivan`,
+        name: `Иван Щёлоков`,
+        years: `нач. XX в.`,
+        gen: `Поколение VI`,
+        kind: `direct`,
+        status: `Документы и семейные свидетельства`,
+        place: `Пос. Грязной / Ленинский`,
+        source: `Раздел I, главы о послереволюционном периоде`,
+        bio: `Получил начальное образование и рано начал трудиться. Его молодость совпала с упразднением казачьих сословий после Гражданской войны и перестройкой уклада жизни посёлка. Отец Фёдора, Николая и Сергея Ивановичей.`,
+        x: 600, y: 145,
+        parents: [`sh-foma`],
+        children: [`sh-fedor`, `sh-nikolay`, `sh-sergey`],
+        links: [{ targetId: `sh-perepelkiny`, label: `Боковая родств. ветвь` }]
+      },
+      {
+        id: `sh-fedor`,
+        name: `Фёдор Иванович Щёлков`,
+        years: `XX век`,
+        gen: `Поколение VII · Глава 12`,
+        kind: `direct`,
+        status: `Пресса 1967–1968 гг. и Приложение`,
+        place: `Оренбургская область · спортивная арена СССР`,
+        source: `Глава 12 (стр. 76–95), газеты «Советский спорт», «Лёгкая атлетика» (Рис. 129–130)`,
+        bio: `После армии преподавал труд в школе, затем работал в комсомоле от районного до областного уровня и возглавил спортивную жизнь Оренбуржья. Развивал сеть ДЮСШ и сельские спартакиады; руководил советскими спортивными делегациями на 5 летних Олимпийских играх и 3 чемпионатах Европы.`,
+        x: 60, y: 270,
+        parents: [`sh-ivan`],
+        children: [],
+        links: []
+      },
+      {
+        id: `sh-nikolay`,
+        name: `Николай Иванович Щёлков`,
+        years: `XX век`,
+        gen: `Поколение VII · стр. 108–112`,
+        kind: `direct`,
+        status: `Документально подтверждено`,
+        place: `Пос. Ленинский (бывш. Грязной), Оренбургская обл.`,
+        source: `Раздел I, очерк о Н. И. Щёлкове (стр. 108–112)`,
+        bio: `Около 1963 года познакомился с Лилией Павловной Семёновой (уроженкой Псковской области) и создал с ней крепкую семью. В книге подчёркивается сохранение живой речи и памяти о старом казачьем Урале в кругу старших поколений.`,
+        x: 340, y: 270,
+        parents: [`sh-ivan`],
+        children: [`sh-yuriy`],
+        links: [{ targetId: `sem-liliya`, label: `Супруга: Л. П. Семёнова` }]
+      },
+      {
+        id: `sh-sergey`,
+        name: `Сергей Иванович Щёлков`,
+        years: `род. 1938`,
+        gen: `Поколение VII`,
+        kind: `direct`,
+        status: `Семейные воспоминания`,
+        place: `Чкаловская (Оренбургская) область`,
+        source: `Раздел I, фрагмент воспоминаний о 1938 г. и послевоенных годах`,
+        bio: `Родился в 1938 году, когда Оренбургская область носила имя Чкаловской. Вспоминая тяжёлые послевоенные годы, описывал скудное питание и ранний сельский труд подростков на летнем сенокосе в совхозе.`,
+        x: 620, y: 270,
+        parents: [`sh-ivan`],
+        children: [],
+        links: []
+      },
+      {
+        id: `sh-yuriy`,
+        name: `Юрий Николаевич и Надежда Николаевна Щёлковы`,
+        years: `XX–XXI вв.`,
+        gen: `Поколение VIII`,
+        kind: `direct`,
+        status: `Свидетельства родителей автора`,
+        place: `Благодарности книги (стр. 13)`,
+        source: `Предисловие и Благодарности В. Ю. Щёлкова`,
+        bio: `Родители автора книги. Именно с их рассказов, семейных фотографий и воспоминаний начался многолетний сбор материалов для хроники «Сквозь века и судьбы».`,
+        x: 340, y: 395,
+        parents: [`sh-nikolay`],
+        children: [`sh-vladimir`],
+        links: []
+      },
+      {
+        id: `sh-vladimir`,
+        name: `Владимир Юрьевич Щёлков`,
+        years: `Автор издания 2026 г.`,
+        gen: `Поколение IX`,
+        kind: `direct`,
+        status: `Составитель и автор хроники`,
+        place: `Москва · 2026`,
+        source: `Титульный лист, предисловие, фото автора в Оренбургских степях`,
+        bio: `Автор книги «Сквозь века и судьбы. Семейная хроника в истории России» (343 с.). Объединил архивные фонды РГАДА, РГВИА, РГИА, метрические книги и живые воспоминания потомков семи родов.`,
+        x: 340, y: 515,
+        parents: [`sh-yuriy`],
+        children: [],
+        links: []
+      },
+      {
+        id: `sh-perepelkiny`,
+        name: `Ветвь Перепёлкиных (Ульяна Яковлевна и потомки)`,
+        years: `XIX–XX вв.`,
+        gen: `Родственная ветвь · Рис. 33-3`,
+        kind: `link`,
+        status: `Семейный фотоархив`,
+        place: `Связующая ветвь с архивами XIX века`,
+        source: `Рис. 33-3, заключительные очерки Раздела I`,
+        bio: `«Живой мостик» между записями XIX в. и потомками: на семейном фото запечатлены Ульяна Яковлевна Перепёлкина, её младший сын Михаил Фомич Перепёлкин с первой женой, внучка Людмила Ивановна Перепёлкина и Екатерина Романовна с сестрой.`,
+        x: 620, y: 395,
+        parents: [],
+        children: [],
+        links: [{ targetId: `sh-ivan`, label: `Линия рода Щёлоковых` }]
+      }
+    ]
+  },
+  {
+    id: `ustinovy`,
+    tabNum: `Род II`,
+    tabTitle: `Устиновы`,
+    sectionTag: `Раздел II · стр. 123–150`,
+    title: `Род Устиновых (Николаевский уезд Заволжья)`,
+    summary: `Родословная ветвь Самарского Заволжья. Последовательно документирована в четырёх главах книги от Марка и Михаила Марковича Устиновых до Алексея Ивановича, участника Первой мировой войны.`,
+    geography: `Николаевский уезд: с. Дергуновка, с. Украинка, х. Плаксин (врезки карты стр. 128, 141)`,
+    sources: `Ревизские сказки и метрические книги о браках и рождениях (Рис. 36, 48, 49), картография Николаевского уезда, лазаретные списки 1915 г.`,
+    defaultNodeId: `us-mikhail`,
+    nodes: [
+      {
+        id: `us-mark`,
+        name: `Марк Устинов`,
+        years: `XIX век`,
+        gen: `Старшее колено`,
+        kind: `recon`,
+        status: `По отчеству сына (Ономастикон: от имени Устин)`,
+        place: `Николаевский уезд`,
+        source: `Отчество Михаила Марковича, Ономастикон книги`,
+        bio: `Имя восстанавливается по отчеству родоначальника Главы 1. Фамилия Устинов образована от календарного личного имени Устин.`,
+        x: 240, y: 20,
+        parents: [],
+        children: [`us-mikhail`],
+        links: []
+      },
+      {
+        id: `us-mikhail`,
+        name: `Михаил Маркович Устинов`,
+        years: `XIX век`,
+        gen: `Глава 1 · стр. 126–132`,
+        kind: `direct`,
+        status: `Документально подтверждено`,
+        place: `Николаевский уезд (с. Дергуновка / с. Украинка)`,
+        source: `Раздел II, Глава 1 (стр. 126–132), карта уезда стр. 128`,
+        bio: `Открывает документальную историю рода Устиновых в Разделе II. Отец Григория и Николая Михайловичей.`,
+        x: 240, y: 140,
+        parents: [`us-mark`],
+        children: [`us-grigoriy`, `us-nikolay`],
+        links: []
+      },
+      {
+        id: `us-grigoriy`,
+        name: `Григорий Михайлович Устинов`,
+        years: `XIX век`,
+        gen: `Глава 2 · стр. 133–138`,
+        kind: `direct`,
+        status: `Метрические записи и ревизии`,
+        place: `Николаевский уезд`,
+        source: `Раздел II, Глава 2 (стр. 133–138)`,
+        bio: `Старший из братьев, рассмотренных совместно во второй главе Раздела II на материалах заволжских сёл.`,
+        x: 80, y: 265,
+        parents: [`us-mikhail`],
+        children: [],
+        links: []
+      },
+      {
+        id: `us-nikolay`,
+        name: `Николай Михайлович Устинов`,
+        years: `XIX век`,
+        gen: `Глава 2 · стр. 133–138`,
+        kind: `direct`,
+        status: `Метрические записи и ревизии`,
+        place: `Николаевский уезд (х. Плаксин / с. Украинка)`,
+        source: `Раздел II, Глава 2 (стр. 133–138)`,
+        bio: `Брат Григория Михайловича. От него прямая линия переходит к Ивану Николаевичу Устинову.`,
+        x: 390, y: 265,
+        parents: [`us-mikhail`],
+        children: [`us-ivan`],
+        links: []
+      },
+      {
+        id: `us-ivan`,
+        name: `Иван Николаевич Устинов`,
+        years: `кон. XIX — нач. XX в.`,
+        gen: `Глава 3 · стр. 139–146`,
+        kind: `direct`,
+        status: `Документально подтверждено`,
+        place: `Николаевский уезд, карта стр. 141`,
+        source: `Раздел II, Глава 3 (стр. 139–146), сканы МК (Рис. 48–49)`,
+        bio: `Жизнь отражена в метрических книгах о браках и рождениях и на детальной карте Николаевского уезда (врезки: с. Дергуновка, с. Украинка, х. Плаксин).`,
+        x: 390, y: 390,
+        parents: [`us-nikolay`],
+        children: [`us-aleksey`],
+        links: []
+      },
+      {
+        id: `us-aleksey`,
+        name: `Алексей Иванович Устинов`,
+        years: `участник ПМВ (1915)`,
+        gen: `Глава 4 · стр. 147–150`,
+        kind: `direct`,
+        status: `Военно-архивные документы`,
+        place: `Австро-венгерский фронт → Штернберг (Чехия) → Гейдельберг`,
+        source: `Раздел II, Глава 4 (стр. 147–150)`,
+        bio: `После оборонительных боёв на австро-венгерском фронте (где потери русских войск составили ок. 72 000 человек) попал в плен. Направлен в сборный пункт в Восточной Пруссии, 11 июля 1915 г. поступил в тыловой лазарет г. Штернберг (ныне Чехия), затем переведён в лагерь для военнопленных в Гейдельберге.`,
+        x: 390, y: 515,
+        parents: [`us-ivan`],
+        children: [],
+        links: []
+      }
+    ]
+  },
+  {
+    id: `semenovy`,
+    tabNum: `Род III`,
+    tabTitle: `Семёновы`,
+    sectionTag: `Раздел III`,
+    title: `Род Семёновых (Псковщина и Оренбуржье)`,
+    summary: `Линия, соединившая Псковскую область и уральский посёлок Ленинский. Через брак Лилии Павловны Семёновой и Николая Ивановича Щёлкова (ок. 1963 г.) этот род напрямую вплетается в современную ветвь Щёлковых.`,
+    geography: `Псковская область → пос. Ленинский (Грязной), Оренбургская область`,
+    sources: `Раздел III, семейный архив Щёлковых, раздел «Семья» в очерке о Н. И. Щёлкове.`,
+    defaultNodeId: `sem-liliya`,
+    nodes: [
+      {
+        id: `sem-pavel`,
+        name: `Павел Семёнов`,
+        years: `первая пол. XX в.`,
+        gen: `Предшествующее поколение`,
+        kind: `recon`,
+        status: `Установлен по отчеству дочери`,
+        place: `Псковская область`,
+        source: `Отчество Л. П. Семёновой`,
+        bio: `Отец Лилии Павловны Семёновой; корни ветви связаны с Псковской землёй.`,
+        x: 240, y: 20,
+        parents: [],
+        children: [`sem-liliya`],
+        links: []
+      },
+      {
+        id: `sem-liliya`,
+        name: `Лилия Павловна Семёнова (Щёлкова)`,
+        years: `брак ок. 1963 г.`,
+        gen: `Ключевой межродовой узел`,
+        kind: `link`,
+        status: `Документально и семейно подтверждено`,
+        place: `Уроженка Псковской обл. → пос. Ленинский`,
+        source: `Раздел I (гл. о Н. И. Щёлкове) и Раздел III`,
+        bio: `Уроженка Псковской области. Около 1963 года познакомилась с Николаем Ивановичем Щёлковым; вместе они создали крепкую семью, объединив псковскую и уральскую семейные истории.`,
+        x: 240, y: 150,
+        parents: [`sem-pavel`],
+        children: [],
+        links: [{ targetId: `sh-nikolay`, label: `Супруг: Н. И. Щёлков` }]
+      },
+      {
+        id: `sem-front-pair`,
+        name: `Иван Егорович и Мария Иоакимовна (Алексеевна)`,
+        years: `Фронт → 1945 → совхоз «Ленинский» (1958–1979)`,
+        gen: `Фронтовая и трудовая история посёлка`,
+        kind: `recon`,
+        status: `Семейные воспоминания и биографические факты`,
+        place: `Пос. Грязной / Озерновская МТС / совхоз «Ленинский»`,
+        source: `Биографическая справка из рукописи книги`,
+        bio: `Познакомились на фронте, в 1945 г. приехали в Грязной. Иван Егорович был директором Озерновской МТС, в 1958–1979 гг. возглавлял совхоз «Ленинский», награждён орденом Ленина. Мария, будучи дочерью Иоакима, позднее носила отчество Алексеевна.`,
+        x: 240, y: 280,
+        parents: [],
+        children: [],
+        links: []
+      }
+    ]
+  },
+  {
+    id: `domniny`,
+    tabNum: `Род IV`,
+    tabTitle: `Домнины`,
+    sectionTag: `Раздел IV · стр. 207–232`,
+    title: `Род Домниных`,
+    summary: `Четвёртый раздел первой части хроники. Исследование построено на архивных выкопировках из метрических книг о венчаниях и рождениях, сведённых в биографические карточки Приложения.`,
+    geography: `Приходы по документам Раздела IV (стр. 207–232)`,
+    sources: `Шмуцтитул Раздела IV (стр. 207), сканы метрических книг (стр. 211, 214), биографические карточки Приложения (стр. 278–286).`,
+    defaultNodeId: `dom-archive`,
+    nodes: [
+      {
+        id: `dom-archive`,
+        name: `Корпус метрических записей рода Домниных`,
+        years: `XIX — нач. XX в.`,
+        gen: `Раздел IV · стр. 207, 211, 214`,
+        kind: `recon`,
+        status: `Подтверждено в макете (стр. 207–214)`,
+        place: `Приходские метрические книги`,
+        source: `Предпечатная проверка 3.docx (анализ стр. 207, 211, 214)`,
+        bio: `Раздел открывается академическим шмуцтитулом (стр. 207) и опирается на выкопировки записей о венчаниях и рождениях из метрических книг (стр. 211, 214). В доступных фрагментах макета детальные имена внутри глав не раскрыты — полная роспись представлена в печатном томе и картотеке стр. 278–286.`,
+        x: 240, y: 40,
+        parents: [],
+        children: [`dom-cards`],
+        links: []
+      },
+      {
+        id: `dom-cards`,
+        name: `Биографические карточки рода Домниных`,
+        years: `Сводный аппарат`,
+        gen: `Часть II · стр. 278–286`,
+        kind: `direct`,
+        status: `Систематизированный справочник`,
+        place: `Сводная картотека семи родов`,
+        source: `Предпечатная проверка 3.docx (оценка стр. 278–286)`,
+        bio: `Содержит выверенные даты рождения, бракосочетаний и кончины представителей рода со ссылками на архивные фонды и дела.`,
+        x: 240, y: 180,
+        parents: [`dom-archive`],
+        children: [],
+        links: []
+      }
+    ]
+  },
+  {
+    id: `neverovy`,
+    tabNum: `Род V`,
+    tabTitle: `Неверовы`,
+    sectionTag: `Раздел V · стр. 233–246`,
+    title: `Род Неверовых (от Селиверста Демидовича, род. 1782)`,
+    summary: `Пятый раздел семейной хроники. Отличается наличием полной поколенной схемы от конца XVIII века и очищенных архивных выкопировок из метрических книг.`,
+    geography: `Приходские и ревизские округа по материалам Раздела V`,
+    sources: `Шмуцтитул (стр. 233), поколенная схема рода Неверовых (стр. 235), метрические книги (стр. 238), карточки стр. 278–286.`,
+    defaultNodeId: `nev-seliverst`,
+    nodes: [
+      {
+        id: `nev-demid`,
+        name: `Демид Неверов`,
+        years: `сер. XVIII в.`,
+        gen: `Старшее колено`,
+        kind: `recon`,
+        status: `По отчеству родоначальника`,
+        place: `Раннее поколение до 1782 г.`,
+        source: `Отчество Селиверста Демидовича (схема стр. 235)`,
+        bio: `Устанавливается по отчеству главы поколенной схемы рода Неверовых.`,
+        x: 240, y: 20,
+        parents: [],
+        children: [`nev-seliverst`],
+        links: []
+      },
+      {
+        id: `nev-seliverst`,
+        name: `Селиверст Демидович Неверов`,
+        years: `род. 1782`,
+        gen: `Основатель схемы · стр. 235`,
+        kind: `direct`,
+        status: `Документально подтверждено на схеме`,
+        place: `Поколенная схема Раздела V`,
+        source: `Предпечатная проверка 3.docx (стр. 235 — поколенная схема от 1782 г.)`,
+        bio: `Ключевая фигура, от которой выстроена центральная поколенная схема рода Неверовых в Разделе V книги.`,
+        x: 240, y: 155,
+        parents: [`nev-demid`],
+        children: [`nev-mk`],
+        links: []
+      },
+      {
+        id: `nev-mk`,
+        name: `Потомки по метрическим книгам и картотеке`,
+        years: `XIX–XX вв.`,
+        gen: `Продолжение линии · стр. 238, 278–286`,
+        kind: `recon`,
+        status: `Архивные сканы МК и Приложение`,
+        place: `Биографические карточки семи родов`,
+        source: `Выкопировки МК (стр. 238) и карточки (стр. 278–286)`,
+        bio: `Дальнейшие поколения рода Неверовых прослежены по записям метрических книг о венчаниях и рождениях (стр. 238) и зафиксированы в сводных карточках Части II.`,
+        x: 240, y: 290,
+        parents: [`nev-seliverst`],
+        children: [],
+        links: []
+      }
+    ]
+  },
+  {
+    id: `surovikiny`,
+    tabNum: `Род VI`,
+    tabTitle: `Суровикины`,
+    sectionTag: `Раздел VI · стр. 247–250`,
+    title: `Род Суровикиных`,
+    summary: `Шестой раздел книги «Сквозь века и судьбы», открывающийся шмуцтитулом на стр. 247 и продолжающийся в сводных биографических карточках второй части.`,
+    geography: `Отражено в архивных материалах Приложения`,
+    sources: `Шмуцтитул Раздела VI (стр. 247), сводные биографические карточки семи родов (стр. 278–286).`,
+    defaultNodeId: `sur-main`,
+    nodes: [
+      {
+        id: `sur-main`,
+        name: `Родовая линия Суровикиных`,
+        years: `Раздел VI`,
+        gen: `Шмуцтитул стр. 247`,
+        kind: `recon`,
+        status: `Включена в корпус 7 родов`,
+        place: `Сводный аппарат книги`,
+        source: `Предпечатная проверка 3.docx (стр. 247, 278–286)`,
+        bio: `Раздел VI оформлен в единой академической стилистике книги. Персоналии и выверенные архивные даты рода Суровикиных систематизированы в биографических карточках Части II (стр. 278–286).`,
+        x: 240, y: 60,
+        parents: [],
+        children: [`sur-cards`],
+        links: []
+      },
+      {
+        id: `sur-cards`,
+        name: `Карточки персон рода Суровикиных`,
+        years: `Часть II`,
+        gen: `Справочный аппарат · стр. 278–286`,
+        kind: `direct`,
+        status: `Выверенные даты и источники`,
+        place: `Приложение к книге`,
+        source: `Анализ стр. 278–286 (семь родов)`,
+        bio: `Часть единого справочника семи родов, обеспечивающего быструю проверку имён, дат и архивных шифров.`,
+        x: 240, y: 200,
+        parents: [`sur-main`],
+        children: [],
+        links: []
+      }
+    ]
+  },
+  {
+    id: `alekseevy`,
+    tabNum: `Род VII`,
+    tabTitle: `Алексеевы`,
+    sectionTag: `Раздел VII · стр. 251–277`,
+    title: `Род Алексеевых (Псковско-заволжский путь)`,
+    summary: `Завершающий исследовательский раздел Части I. Прослеживает масштабное переселение с высокой исторической точностью: от Псковщины через Бузулукский уезд и деревню Ветошки в Оренбуржье.`,
+    geography: `Псковщина → Бузулукский уезд (д. Ветошки, стр. 264–266) → Оренбуржье`,
+    sources: `Материалы ревизий и метрических книг д. Ветошки (стр. 264–266), Раздел VII (стр. 251–277), карточки стр. 278–286.`,
+    defaultNodeId: `al-pskov`,
+    nodes: [
+      {
+        id: `al-pskov`,
+        name: `Псковские истоки рода Алексеевых`,
+        years: `XIX в.`,
+        gen: `Этап I · Псковщина`,
+        kind: `recon`,
+        status: `Документальная реконструкция переселения`,
+        place: `Псковская земля`,
+        source: `Раздел VII (стр. 251–277)`,
+        bio: `Начальный географический узел псковско-заволжского пути рода Алексеевых перед переселением крестьянских и служилых семей на восточные земли.`,
+        x: 240, y: 20,
+        parents: [],
+        children: [`al-vetoshki`],
+        links: []
+      },
+      {
+        id: `al-vetoshki`,
+        name: `Бузулукский уезд и история д. Ветошки`,
+        years: `XIX — нач. XX в.`,
+        gen: `Этап II · стр. 264–266`,
+        kind: `direct`,
+        status: `Ревизии и метрики д. Ветошки`,
+        place: `Деревня Ветошки, Бузулукский уезд`,
+        source: `Предпечатная проверка 3.docx (анализ стр. 264–266)`,
+        bio: `История деревни Ветошки и закрепление рода в Заволжье изложены с опорой на ревизские сказки и приходские метрические книги.`,
+        x: 240, y: 155,
+        parents: [`al-pskov`],
+        children: [`al-orenburg`],
+        links: []
+      },
+      {
+        id: `al-orenburg`,
+        name: `Оренбургский узел и переход к Части II`,
+        years: `XX в.`,
+        gen: `Этап III · стр. 277–286`,
+        kind: `direct`,
+        status: `Синтез географии хроники`,
+        place: `Оренбуржье`,
+        source: `Завершение Части I (стр. 277) и карточки (стр. 278–286)`,
+        bio: `Сводит воедино три главные территории книги (Псковщина — Бузулукский уезд — Оренбуржье) и открывает системный переход от исторического нарратива к сводным биографическим карточкам.`,
+        x: 240, y: 290,
+        parents: [`al-vetoshki`],
+        children: [],
+        links: []
+      }
+    ]
+  }
+];
+
+// Application State
+let state = {
+  clanId: `shchelokovy`,
+  nodeId: `sh-foma`,
+  viewMode: `tree`, // 'tree' | 'list'
+  zoom: 1,
+  panX: 0,
+  panY: 0,
+  searchQuery: ``
+};
+
+// Touch / Gesture State for Tree Pan + Pinch and Clan Swipe
+const gesture = {
+  activePointers: new Map(),
+  isPanning: false,
+  startPanX: 0,
+  startPanY: 0,
+  startPointerX: 0,
+  startPointerY: 0,
+  pinchStartDist: 0,
+  pinchStartZoom: 1,
+  swipeStartX: 0,
+  swipeStartY: 0,
+  swipeTracking: false
+};
+
+const NODE_W = 220;
+const NODE_H = 82;
+
+function getClanById(id) {
+  return CLANS.find(c => c.id === id) || CLANS[0];
+}
+
+function getNodeById(clan, nodeId) {
+  return clan.nodes.find(n => n.id === nodeId) || clan.nodes[0];
+}
+
+function findGlobalNode(nodeId) {
+  for (let i = 0; i < CLANS.length; i++) {
+    const clan = CLANS[i];
+    const found = clan.nodes.find(n => n.id === nodeId);
+    if (found) return { clan, node: found };
+  }
+  return null;
+}
+
+function renderClanRail() {
+  const rail = document.getElementById(`clan-rail`);
+  if (!rail) return;
+  rail.innerHTML = ``;
+  CLANS.forEach(clan => {
+    const btn = document.createElement(`button`);
+    btn.type = `button`;
+    btn.className = `clan-tab` + (clan.id === state.clanId ? ` is-selected` : ``);
+    btn.setAttribute(`role`, `tab`);
+    btn.setAttribute(`aria-selected`, clan.id === state.clanId ? `true` : `false`);
+    btn.onclick = function() { selectClan(clan.id); };
+
+    const numSpan = document.createElement(`span`);
+    numSpan.className = `clan-tab-num`;
+    numSpan.textContent = clan.tabNum;
+
+    const titleSpan = document.createElement(`span`);
+    titleSpan.className = `clan-tab-title`;
+    titleSpan.textContent = clan.tabTitle;
+
+    btn.appendChild(numSpan);
+    btn.appendChild(titleSpan);
+    rail.appendChild(btn);
+
+    if (clan.id === state.clanId && typeof btn.scrollIntoView === `function`) {
+      // Gentle horizontal centering inside the rail without moving the page vertically
+      const railRect = rail.getBoundingClientRect();
+      const btnLeft = btn.offsetLeft;
+      const targetScroll = btnLeft - (railRect.width / 2) + (btn.offsetWidth / 2);
+      if (railRect.width > 0) {
+        rail.scrollTo({ left: Math.max(0, targetScroll), behavior: `smooth` });
+      }
+    }
+  });
+
+  const idx = CLANS.findIndex(c => c.id === state.clanId);
+  const prevBtn = document.getElementById(`prev-clan-btn`);
+  const nextBtn = document.getElementById(`next-clan-btn`);
+  if (prevBtn) prevBtn.disabled = idx <= 0;
+  if (nextBtn) nextBtn.disabled = idx >= CLANS.length - 1;
+}
+
+function selectClan(clanId, preferredNodeId) {
+  const clan = getClanById(clanId);
+  state.clanId = clan.id;
+  state.nodeId = preferredNodeId || clan.defaultNodeId || clan.nodes[0].id;
+  renderAll(true);
+}
+
+function stepClan(delta) {
+  const idx = CLANS.findIndex(c => c.id === state.clanId);
+  const nextIdx = idx + delta;
+  if (nextIdx >= 0 && nextIdx < CLANS.length) {
+    selectClan(CLANS[nextIdx].id);
+  }
+}
+
+function selectNode(nodeId, jumpToClanId) {
+  if (jumpToClanId && jumpToClanId !== state.clanId) {
+    selectClan(jumpToClanId, nodeId);
+    return;
+  }
+  const match = findGlobalNode(nodeId);
+  if (!match) return;
+  if (match.clan.id !== state.clanId) {
+    state.clanId = match.clan.id;
+    state.nodeId = match.node.id;
+    renderAll(true);
+  } else {
+    state.nodeId = match.node.id;
+    renderAll(false);
+  }
+}
+
+function stepNode(delta) {
+  const clan = getClanById(state.clanId);
+  const idx = clan.nodes.findIndex(n => n.id === state.nodeId);
+  const nextIdx = idx + delta;
+  if (nextIdx >= 0 && nextIdx < clan.nodes.length) {
+    state.nodeId = clan.nodes[nextIdx].id;
+    renderAll(false);
+  }
+}
+
+function setViewMode(mode) {
+  state.viewMode = mode === `list` ? `list` : `tree`;
+  const btnTree = document.getElementById(`btn-mode-tree`);
+  const btnList = document.getElementById(`btn-mode-list`);
+  const shell = document.getElementById(`tree-shell`);
+  const listView = document.getElementById(`generation-list-view`);
+
+  if (btnTree && btnList) {
+    btnTree.classList.toggle(`btn-active`, state.viewMode === `tree`);
+    btnTree.setAttribute(`aria-pressed`, state.viewMode === `tree` ? `true` : `false`);
+    btnList.classList.toggle(`btn-active`, state.viewMode === `list`);
+    btnList.setAttribute(`aria-pressed`, state.viewMode === `list` ? `true` : `false`);
+  }
+  if (shell) shell.classList.toggle(`is-hidden`, state.viewMode !== `tree`);
+  if (listView) listView.classList.toggle(`is-visible`, state.viewMode === `list`);
+
+  if (state.viewMode === `tree`) {
+    fitTreeToViewport();
+  }
+}
+
+function renderBanner(clan) {
+  const tagEl = document.getElementById(`clan-tag`);
+  const titleEl = document.getElementById(`clan-title`);
+  const summaryEl = document.getElementById(`clan-summary`);
+  const geoEl = document.getElementById(`clan-geography`);
+  const srcEl = document.getElementById(`clan-sources`);
+  const countEl = document.getElementById(`tree-node-count`);
+
+  if (tagEl) tagEl.textContent = clan.sectionTag;
+  if (titleEl) titleEl.textContent = clan.title;
+  if (summaryEl) summaryEl.textContent = clan.summary;
+  if (geoEl) geoEl.textContent = clan.geography;
+  if (srcEl) srcEl.textContent = clan.sources;
+  if (countEl) countEl.textContent = `Узлов в ветви: ${clan.nodes.length}`;
+}
+
+function wrapText(text, maxChars) {
+  const words = text.split(` `);
+  const lines = [];
+  let current = ``;
+  for (let i = 0; i < words.length; i++) {
+    const candidate = current ? `${current} ${words[i]}` : words[i];
+    if (candidate.length > maxChars && current) {
+      lines.push(current);
+      current = words[i];
+    } else {
+      current = candidate;
+    }
+  }
+  if (current) lines.push(current);
+  return lines.slice(0, 2);
+}
+
+function createSvgEl(tag, attrs) {
+  const el = document.createElementNS(`http://www.w3.org/2000/svg`, tag);
+  for (const key in attrs) {
+    el.setAttribute(key, attrs[key]);
+  }
+  return el;
+}
+
+function renderTreeSvg(clan, shouldFit) {
+  const group = document.getElementById(`tree-pan-group`);
+  if (!group) return;
+  group.innerHTML = ``;
+
+  // Draw orthogonal edges first
+  clan.nodes.forEach(node => {
+    node.children.forEach(childId => {
+      const child = clan.nodes.find(n => n.id === childId);
+      if (!child) return;
+      const x1 = node.x + NODE_W / 2;
+      const y1 = node.y + NODE_H;
+      const x2 = child.x + NODE_W / 2;
+      const y2 = child.y;
+      const midY = (y1 + y2) / 2;
+      const d = `M ${x1} ${y1} L ${x1} ${midY} L ${x2} ${midY} L ${x2} ${y2}`;
+      group.appendChild(createSvgEl(`path`, { d, class: `svg-edge` }));
+    });
+
+    // Draw dashed lateral link within the same clan
+    if (node.links && node.links.length > 0) {
+      node.links.forEach(lnk => {
+        const peer = clan.nodes.find(n => n.id === lnk.targetId);
+        if (peer && node.id < peer.id) {
+          const x1 = node.x + NODE_W / 2;
+          const y1 = node.y + NODE_H / 2;
+          const x2 = peer.x + NODE_W / 2;
+          const y2 = peer.y + NODE_H / 2;
+          const d = `M ${x1} ${y1} Q ${(x1 + x2) / 2} ${Math.min(y1, y2) - 24} ${x2} ${y2}`;
+          group.appendChild(createSvgEl(`path`, { d, class: `svg-edge-dashed` }));
+        }
+      });
+    }
+  });
+
+  // Draw node boxes
+  clan.nodes.forEach(node => {
+    const isSelected = node.id === state.nodeId;
+    const g = createSvgEl(`g`, {
+      class: `svg-node` + (isSelected ? ` is-selected` : ``),
+      transform: `translate(${node.x}, ${node.y})`,
+      tabindex: `0`,
+      role: `button`,
+      'aria-label': `${node.name}, ${node.years}`
+    });
+
+    g.addEventListener(`click`, function(e) {
+      e.stopPropagation();
+      if (node.clanJump && clan.id === `overview`) {
+        // In overview mode, tapping selects the overview dossier first, and a button jumps into the clan;
+        // or if already selected, opens the clan directly!
+        if (state.nodeId === node.id) {
+          selectClan(node.clanJump);
+          return;
+        }
+      }
+      selectNode(node.id);
+    });
+    g.addEventListener(`keydown`, function(e) {
+      if (e.key === `Enter` || e.key === ` `) {
+        e.preventDefault();
+        selectNode(node.id);
+      }
+    });
+
+    const box = createSvgEl(`rect`, {
+      x: `0`, y: `0`, width: String(NODE_W), height: String(NODE_H),
+      class: `svg-node-box`
+    });
+    g.appendChild(box);
+
+    // Top accent bar matching node kind
+    let stripeColor = `var(--primary)`;
+    if (node.kind === `link`) stripeColor = `var(--secondary)`;
+    if (node.kind === `recon`) stripeColor = `var(--tertiary)`;
+    g.appendChild(createSvgEl(`rect`, {
+      x: `0`, y: `0`, width: String(NODE_W), height: `4`, fill: stripeColor
+    }));
+
+    const genText = createSvgEl(`text`, { x: `10`, y: `19`, class: `svg-node-gen` });
+    genText.textContent = node.gen.slice(0, 30);
+    g.appendChild(genText);
+
+    const lines = wrapText(node.name, 26);
+    lines.forEach((line, idx) => {
+      const t = createSvgEl(`text`, {
+        x: `10`,
+        y: String(38 + idx * 16),
+        class: `svg-node-title`
+      });
+      t.textContent = line;
+      g.appendChild(t);
+    });
+
+    const yearsText = createSvgEl(`text`, {
+      x: `10`,
+      y: String(NODE_H - 9),
+      class: `svg-node-sub`
+    });
+    yearsText.textContent = node.years.slice(0, 32);
+    g.appendChild(yearsText);
+
+    group.appendChild(g);
+  });
+
+  if (shouldFit) {
+    fitTreeToViewport();
+  } else {
+    applyTransform();
+  }
+}
+
+function getTreeBounds(clan) {
+  let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+  clan.nodes.forEach(n => {
+    if (n.x < minX) minX = n.x;
+    if (n.y < minY) minY = n.y;
+    if (n.x + NODE_W > maxX) maxX = n.x + NODE_W;
+    if (n.y + NODE_H > maxY) maxY = n.y + NODE_H;
+  });
+  return {
+    minX, minY,
+    width: Math.max(240, maxX - minX),
+    height: Math.max(120, maxY - minY)
+  };
+}
+
+function fitTreeToViewport() {
+  const viewport = document.getElementById(`tree-viewport`);
+  const clan = getClanById(state.clanId);
+  if (!viewport) return;
+
+  const rect = viewport.getBoundingClientRect();
+  const vw = rect.width || 340;
+  const vh = rect.height || 340;
+  const bounds = getTreeBounds(clan);
+
+  const pad = 24;
+  const scaleX = (vw - pad * 2) / bounds.width;
+  const scaleY = (vh - pad * 2) / bounds.height;
+  let fitZoom = Math.min(scaleX, scaleY, 1.05);
+  fitZoom = Math.max(0.38, Math.min(1.2, fitZoom));
+
+  state.zoom = fitZoom;
+  state.panX = (vw - bounds.width * fitZoom) / 2 - bounds.minX * fitZoom;
+  state.panY = (vh - bounds.height * fitZoom) / 2 - bounds.minY * fitZoom;
+  applyTransform();
+}
+
+function resetViewport() {
+  fitTreeToViewport();
+}
+
+function adjustZoom(delta) {
+  const viewport = document.getElementById(`tree-viewport`);
+  if (!viewport) return;
+  const rect = viewport.getBoundingClientRect();
+  const cx = rect.width / 2;
+  const cy = rect.height / 2;
+
+  const prevZoom = state.zoom;
+  const nextZoom = Math.max(0.35, Math.min(2.2, prevZoom + delta));
+  if (nextZoom === prevZoom) return;
+
+  const factor = nextZoom / prevZoom;
+  state.panX = cx - (cx - state.panX) * factor;
+  state.panY = cy - (cy - state.panY) * factor;
+  state.zoom = nextZoom;
+  applyTransform();
+}
+
+function applyTransform() {
+  const group = document.getElementById(`tree-pan-group`);
+  const readout = document.getElementById(`zoom-readout`);
+  if (group) {
+    group.setAttribute(`transform`, `translate(${state.panX.toFixed(1)}, ${state.panY.toFixed(1)}) scale(${state.zoom.toFixed(3)})`);
+  }
+  if (readout) {
+    readout.textContent = `${Math.round(state.zoom * 100)}%`;
+  }
+}
+
+function renderGenerationList(clan) {
+  const container = document.getElementById(`generation-list-view`);
+  if (!container) return;
+  container.innerHTML = ``;
+
+  const groups = [];
+  const groupMap = new Map();
+  clan.nodes.forEach(node => {
+    const key = node.gen || `Поколение`;
+    if (!groupMap.has(key)) {
+      const arr = [];
+      groupMap.set(key, arr);
+      groups.push({ title: key, items: arr });
+    }
+    groupMap.get(key).push(node);
+  });
+
+  groups.forEach(grp => {
+    const section = document.createElement(`div`);
+    section.className = `gen-group`;
+
+    const title = document.createElement(`div`);
+    title.className = `gen-group-title`;
+    title.textContent = grp.title;
+    section.appendChild(title);
+
+    const grid = document.createElement(`div`);
+    grid.className = `gen-cards-grid`;
+
+    grp.items.forEach(node => {
+      const btn = document.createElement(`button`);
+      btn.type = `button`;
+      btn.className = `person-card-btn kind-${node.kind}` + (node.id === state.nodeId ? ` is-selected` : ``);
+      btn.onclick = function() {
+        selectNode(node.id);
+        const dossier = document.getElementById(`dossier-panel`);
+        if (dossier && typeof dossier.scrollIntoView === `function`) {
+          dossier.scrollIntoView({ behavior: `smooth`, block: `nearest` });
+        }
+      };
+
+      const nameEl = document.createElement(`span`);
+      nameEl.className = `person-card-name`;
+      nameEl.textContent = node.name;
+
+      const yearsEl = document.createElement(`span`);
+      yearsEl.className = `person-card-years`;
+      yearsEl.textContent = `${node.years} · ${node.status}`;
+
+      const roleEl = document.createElement(`span`);
+      roleEl.className = `person-card-role`;
+      roleEl.textContent = node.place;
+
+      btn.appendChild(nameEl);
+      btn.appendChild(yearsEl);
+      btn.appendChild(roleEl);
+      grid.appendChild(btn);
+    });
+
+    section.appendChild(grid);
+    container.appendChild(section);
+  });
+}
+
+function renderDossier(clan) {
+  const node = getNodeById(clan, state.nodeId);
+  const statusEl = document.getElementById(`dossier-status`);
+  const nameEl = document.getElementById(`dossier-name`);
+  const yearsEl = document.getElementById(`dossier-years`);
+  const genEl = document.getElementById(`dossier-gen`);
+  const bioEl = document.getElementById(`dossier-bio`);
+  const placeEl = document.getElementById(`dossier-place`);
+  const sourceEl = document.getElementById(`dossier-source`);
+  const relListEl = document.getElementById(`dossier-relations-list`);
+
+  if (statusEl) statusEl.textContent = node.status;
+  if (nameEl) nameEl.textContent = node.name;
+  if (yearsEl) yearsEl.textContent = node.years;
+  if (genEl) genEl.textContent = node.gen;
+  if (bioEl) bioEl.textContent = node.bio;
+  if (placeEl) placeEl.textContent = node.place;
+  if (sourceEl) sourceEl.textContent = node.source;
+
+  if (relListEl) {
+    relListEl.innerHTML = ``;
+
+    // If overview node has clanJump, offer direct entry button
+    if (node.clanJump) {
+      const targetClan = getClanById(node.clanJump);
+      const jumpBtn = document.createElement(`button`);
+      jumpBtn.type = `button`;
+      jumpBtn.className = `btn btn-primary`;
+      jumpBtn.textContent = `Открыть ветвь: ${targetClan.tabTitle} →`;
+      jumpBtn.onclick = function() { selectClan(targetClan.id); };
+      relListEl.appendChild(jumpBtn);
+    }
+
+    const addRelBtn = function(targetId, roleLabel) {
+      const found = findGlobalNode(targetId);
+      if (!found) return;
+      const btn = document.createElement(`button`);
+      btn.type = `button`;
+      btn.className = `relation-btn`;
+      btn.onclick = function() { selectNode(found.node.id, found.clan.id); };
+
+      const left = document.createElement(`span`);
+      left.textContent = found.node.name;
+
+      const right = document.createElement(`span`);
+      right.className = `relation-tag`;
+      right.textContent = roleLabel;
+
+      btn.appendChild(left);
+      btn.appendChild(right);
+      relListEl.appendChild(btn);
+    };
+
+    (node.parents || []).forEach(pid => addRelBtn(pid, `Предок`));
+    (node.children || []).forEach(cid => addRelBtn(cid, `Потомок`));
+    (node.links || []).forEach(lnk => addRelBtn(lnk.targetId, lnk.label));
+
+    if (relListEl.children.length === 0) {
+      const emptyNote = document.createElement(`div`);
+      emptyNote.style.fontSize = `0.9rem`;
+      emptyNote.style.color = `var(--on-surface-variant)`;
+      emptyNote.textContent = `Дополнительные переходы по этой линии приведены в полной поколенной росписи книги.`;
+      relListEl.appendChild(emptyNote);
+    }
+  }
+
+  const idx = clan.nodes.findIndex(n => n.id === node.id);
+  const prevBtn = document.getElementById(`prev-node-btn`);
+  const nextBtn = document.getElementById(`next-node-btn`);
+  if (prevBtn) prevBtn.disabled = idx <= 0;
+  if (nextBtn) nextBtn.disabled = idx >= clan.nodes.length - 1;
+}
+
+function handleSearchInput(query) {
+  state.searchQuery = (query || ``).trim();
+  const box = document.getElementById(`search-results-box`);
+  const grid = document.getElementById(`search-results-grid`);
+  const countEl = document.getElementById(`search-results-count`);
+  if (!box || !grid || !countEl) return;
+
+  if (state.searchQuery.length < 2) {
+    box.classList.remove(`is-open`);
+    grid.innerHTML = ``;
+    return;
+  }
+
+  const q = state.searchQuery.toLowerCase();
+  const matches = [];
+  CLANS.forEach(clan => {
+    if (clan.id === `overview`) return;
+    clan.nodes.forEach(node => {
+      const hay = `${clan.tabTitle} ${node.name} ${node.years} ${node.place} ${node.bio} ${node.source}`.toLowerCase();
+      if (hay.indexOf(q) !== -1) {
+        matches.push({ clan, node });
+      }
+    });
+  });
+
+  box.classList.add(`is-open`);
+  countEl.textContent = `Найдено записей: ${matches.length}`;
+  grid.innerHTML = ``;
+
+  if (matches.length === 0) {
+    const empty = document.createElement(`div`);
+    empty.style.color = `var(--on-surface-variant)`;
+    empty.textContent = `Совпадений не найдено. Попробуйте: Щёлоков, Устинов, Семёнова, Неверов, Алексеевы, 1905.`;
+    grid.appendChild(empty);
+    return;
+  }
+
+  matches.slice(0, 12).forEach(m => {
+    const btn = document.createElement(`button`);
+    btn.type = `button`;
+    btn.className = `search-hit-btn`;
+    btn.onclick = function() {
+      selectNode(m.node.id, m.clan.id);
+      box.classList.remove(`is-open`);
+    };
+
+    const cEl = document.createElement(`span`);
+    cEl.className = `search-hit-clan`;
+    cEl.textContent = `${m.clan.tabNum} · ${m.clan.tabTitle}`;
+
+    const nEl = document.createElement(`span`);
+    nEl.className = `search-hit-name`;
+    nEl.textContent = m.node.name;
+
+    const metaEl = document.createElement(`span`);
+    metaEl.className = `search-hit-meta`;
+    metaEl.textContent = `${m.node.years} — ${m.node.place}`;
+
+    btn.appendChild(cEl);
+    btn.appendChild(nEl);
+    btn.appendChild(metaEl);
+    grid.appendChild(btn);
+  });
+}
+
+function clearSearch() {
+  const input = document.getElementById(`genealogy-search`);
+  const box = document.getElementById(`search-results-box`);
+  if (input) input.value = ``;
+  if (box) box.classList.remove(`is-open`);
+  state.searchQuery = ``;
+}
+
+function focusGeoRegion(regionKey) {
+  const buttons = [`ural`, `zavolzhye`, `pskov`];
+  buttons.forEach(k => {
+    const b = document.getElementById(`geo-btn-${k}`);
+    if (b) b.classList.toggle(`is-active`, k === regionKey);
+  });
+
+  if (regionKey === `ural`) {
+    selectClan(`shchelokovy`, `sh-foma`);
+  } else if (regionKey === `zavolzhye`) {
+    selectClan(`ustinovy`, `us-ivan`);
+  } else if (regionKey === `pskov`) {
+    selectClan(`semenovy`, `sem-liliya`);
+  }
+
+  const workspace = document.getElementById(`clan-workspace`);
+  if (workspace && typeof workspace.scrollIntoView === `function`) {
+    workspace.scrollIntoView({ behavior: `smooth`, block: `start` });
+  }
+}
+
+function renderAll(shouldFitTree) {
+  const clan = getClanById(state.clanId);
+  renderClanRail();
+  renderBanner(clan);
+  renderTreeSvg(clan, shouldFitTree);
+  renderGenerationList(clan);
+  renderDossier(clan);
+  notifyParentHeight();
+}
+
+// Interactive Pointer + Touch Gestures for Tree Canvas (Pan + Pinch-to-Zoom)
+function setupTreeGestures() {
+  const viewport = document.getElementById(`tree-viewport`);
+  if (!viewport) return;
+
+  function getDist(p1, p2) {
+    const dx = p1.x - p2.x;
+    const dy = p1.y - p2.y;
+    return Math.sqrt(dx * dx + dy * dy);
+  }
+
+  viewport.addEventListener(`pointerdown`, function(e) {
+    // Allow clicking directly on SVG nodes cleanly without starting a pan until moved
+    gesture.activePointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+
+    if (gesture.activePointers.size === 1) {
+      gesture.isPanning = true;
+      gesture.startPointerX = e.clientX;
+      gesture.startPointerY = e.clientY;
+      gesture.startPanX = state.panX;
+      gesture.startPanY = state.panY;
+    } else if (gesture.activePointers.size === 2) {
+      gesture.isPanning = false;
+      const pts = Array.from(gesture.activePointers.values());
+      gesture.pinchStartDist = getDist(pts[0], pts[1]);
+      gesture.pinchStartZoom = state.zoom;
+    }
+  });
+
+  viewport.addEventListener(`pointermove`, function(e) {
+    if (!gesture.activePointers.has(e.pointerId)) return;
+    gesture.activePointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+
+    if (gesture.activePointers.size === 1 && gesture.isPanning) {
+      const dx = e.clientX - gesture.startPointerX;
+      const dy = e.clientY - gesture.startPointerY;
+      if (Math.abs(dx) > 3 || Math.abs(dy) > 3) {
+        state.panX = gesture.startPanX + dx;
+        state.panY = gesture.startPanY + dy;
+        applyTransform();
+      }
+    } else if (gesture.activePointers.size === 2) {
+      const pts = Array.from(gesture.activePointers.values());
+      const dist = getDist(pts[0], pts[1]);
+      if (gesture.pinchStartDist > 10) {
+        const rect = viewport.getBoundingClientRect();
+        const midX = (pts[0].x + pts[1].x) / 2 - rect.left;
+        const midY = (pts[0].y + pts[1].y) / 2 - rect.top;
+
+        const prevZoom = state.zoom;
+        const targetZoom = Math.max(0.35, Math.min(2.2, gesture.pinchStartZoom * (dist / gesture.pinchStartDist)));
+        const factor = targetZoom / prevZoom;
+        state.panX = midX - (midX - state.panX) * factor;
+        state.panY = midY - (midY - state.panY) * factor;
+        state.zoom = targetZoom;
+        applyTransform();
+      }
+    }
+  });
+
+  function clearPointer(e) {
+    gesture.activePointers.delete(e.pointerId);
+    if (gesture.activePointers.size === 0) {
+      gesture.isPanning = false;
+    }
+  }
+
+  viewport.addEventListener(`pointerup`, clearPointer);
+  viewport.addEventListener(`pointercancel`, clearPointer);
+  viewport.addEventListener(`pointerleave`, clearPointer);
+
+  // Desktop mouse wheel zoom inside canvas (only when Ctrl pressed or intentional)
+  viewport.addEventListener(`wheel`, function(e) {
+    e.preventDefault();
+    const delta = e.deltaY < 0 ? 0.12 : -0.12;
+    adjustZoom(delta);
+  }, { passive: false });
+}
+
+// Horizontal Swipe Gesture on Banner & Dossier to switch between the 7 clans
+function setupClanSwipeGestures() {
+  const targets = [
+    document.querySelector(`.clan-banner`),
+    document.getElementById(`dossier-panel`),
+    document.getElementById(`generation-list-view`)
+  ];
+
+  targets.forEach(el => {
+    if (!el) return;
+    el.addEventListener(`touchstart`, function(e) {
+      if (e.touches.length !== 1) return;
+      gesture.swipeTracking = true;
+      gesture.swipeStartX = e.touches[0].clientX;
+      gesture.swipeStartY = e.touches[0].clientY;
+    }, { passive: true });
+
+    el.addEventListener(`touchend`, function(e) {
+      if (!gesture.swipeTracking || e.changedTouches.length !== 1) return;
+      gesture.swipeTracking = false;
+      const dx = e.changedTouches[0].clientX - gesture.swipeStartX;
+      const dy = e.changedTouches[0].clientY - gesture.swipeStartY;
+      // Trigger clan swipe only on clear horizontal swipe (doesn't fight vertical scroll)
+      if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.6) {
+        if (dx < 0) stepClan(1);
+        else stepClan(-1);
+      }
+    }, { passive: true });
+  });
+}
+
+// Auto-resize notification for seamless Google Sites iframe embedding
+function notifyParentHeight() {
+  try {
+    if (window.parent && window.parent !== window) {
+      const h = document.documentElement.scrollHeight;
+      window.parent.postMessage({ type: `nashi-korni-resize`, height: h }, `*`);
+    }
+  } catch (err) {
+    // Safe fallback if parent blocks postMessage
+  }
+}
+
+// Initialization
+document.addEventListener(`DOMContentLoaded`, function() {
+  // Default to mobile-friendly list on ultra-narrow screens if preferred, or tree with auto-fit
+  setupTreeGestures();
+  setupClanSwipeGestures();
+  renderAll(true);
+
+  if (typeof ResizeObserver !== `undefined`) {
+    const ro = new ResizeObserver(function() {
+      fitTreeToViewport();
+      notifyParentHeight();
+    });
+    const root = document.getElementById(`app-root`);
+    if (root) ro.observe(root);
+  } else {
+    window.addEventListener(`resize`, function() {
+      fitTreeToViewport();
+      notifyParentHeight();
+    });
+  }
+});
+</script>
+</body>
+</html>
