@@ -106,7 +106,15 @@
       -webkit-font-smoothing: antialiased;
     }
     header { position: static !important; }
-    button, input, select, textarea { font-family: inherit; }
+    
+    /* Global Reset for all links and interactive elements */
+    a, a:visited, a:hover, a:focus, a:active {
+      text-decoration: none !important;
+      color: inherit;
+      outline: none;
+    }
+    button, input, select, textarea, a { font-family: inherit; }
+
 
     /* Focus rings */
     :focus-visible {
@@ -284,6 +292,15 @@
       color: var(--on-surface);
       min-height: 44px;
       justify-content: center;
+      text-decoration: none !important;
+      transition: opacity var(--dur-short) var(--ease-out);
+    }
+    .brand-link:hover {
+      opacity: 0.88;
+      text-decoration: none !important;
+    }
+    .brand-link * {
+      text-decoration: none !important;
     }
     .brand-title {
       font-family: var(--font-headline);
@@ -333,18 +350,33 @@
       background: transparent;
       border: 0;
       border-bottom: 2px solid transparent;
-      padding: var(--space-sm) var(--space-md);
-      min-height: 44px;
+      padding: var(--space-xs) var(--space-md);
+      min-height: 40px;
       display: inline-flex;
       align-items: center;
       font-family: var(--font-label);
-      font-size: 0.875rem;
+      font-size: 0.82rem;
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.12em;
-      color: var(--on-surface);
+      color: var(--on-surface-variant);
       cursor: pointer;
+      text-decoration: none !important;
+      border-radius: var(--rounded-sm);
       transition: color var(--dur-short) var(--ease-out), border-color var(--dur-short) var(--ease-out), background-color var(--dur-short) var(--ease-out);
+    }
+    .nav-item:hover {
+      color: var(--primary);
+      background-color: var(--surface-container);
+      border-bottom-color: transparent;
+      text-decoration: none !important;
+    }
+    .nav-item.active {
+      color: var(--primary);
+      font-weight: 700;
+      border-bottom-color: var(--primary);
+      background-color: var(--surface-container-high);
+      text-decoration: none !important;
     }
     .nav-item:hover {
       color: var(--primary);
@@ -1181,7 +1213,13 @@
         scroll-behavior: auto !important;
       }
     }
-  </style>
+  
+    /* Interactive Card & Link Resets */
+    .archive-card, .archive-card *, .archive-card-action,
+    .btn, .btn *, .lineage-btn, .lineage-btn *, .rel-chip, .person-card, .tree-node-btn {
+      text-decoration: none !important;
+    }
+</style>
 </head>
 <body>
   <div class="site-shell">
@@ -1196,7 +1234,7 @@
         </div>
 
         <div class="header-main">
-          <button type="button" class="brand-link" onclick="navigateTo('home')" aria-label="Сквозь века и судьбы — на главную">
+          <a href="/" class="brand-link" onclick="navigateTo(event, 'home')"  aria-label="Сквозь века и судьбы — на главную">
             <span class="brand-title">Сквозь века и судьбы</span>
             <span class="brand-sub">Семейная хроника</span>
           </button>
@@ -1206,15 +1244,15 @@
           </button>
 
           <nav id="primary-nav" class="primary-nav" aria-label="Основная навигация сайта">
-            <button type="button" class="nav-item active" data-route="home" onclick="navigateTo('home')">Главная</button>
+            <a href="/" class="nav-item" data-route="home" onclick="navigateTo(event, 'home')">Главная</a>
             <span class="nav-middot" aria-hidden="true">·</span>
-            <button type="button" class="nav-item" data-route="tree" onclick="navigateTo('tree')">Родословная</button>
+            <a href="/tree/" class="nav-item" data-route="tree" onclick="navigateTo(event, 'tree')">Родословная</a>
             <span class="nav-middot" aria-hidden="true">·</span>
-            <button type="button" class="nav-item" data-route="gallery" onclick="navigateTo('gallery')">Фотогалерея</button>
+            <a href="/gallery/" class="nav-item" data-route="gallery" onclick="navigateTo(event, 'gallery')">Фотогалерея</a>
             <span class="nav-middot" aria-hidden="true">·</span>
-            <button type="button" class="nav-item" data-route="archive" onclick="navigateTo('archive')">Архив семьи</button>
+            <a href="/archive/" class="nav-item" data-route="archive" onclick="navigateTo(event, 'archive')">Архив семьи</a>
             <span class="nav-middot" aria-hidden="true">·</span>
-            <button type="button" class="nav-item" data-route="book" onclick="navigateTo('book')">Семейная книга</button>
+            <a href="/book/" class="nav-item active" data-route="book" onclick="navigateTo(event, 'book')">Семейная книга</a>
           </nav>
         </div>
       </div>
@@ -1286,8 +1324,8 @@
                 Семейная хроника родов <strong>Щёлоковых, Устиновых, Семёновых, Домниных, Неверовых, Суровикиных, Алексеевых и Толкачёвых</strong> — от казачьих застав Причаганья и крестьянских сёл Поволжья до Псковской земли.
               </p>
               <div class="hero-actions">
-                <button type="button" class="btn btn-primary" onclick="navigateTo('tree')">Открыть родословное древо</button>
-                <button type="button" class="btn btn-secondary" onclick="navigateTo('book')">О печатной книге</button>
+                <a href="/tree/" class="btn btn-primary" onclick="navigateTo(event, 'tree')">Открыть родословное древо</a>
+                <a href="/book/" class="btn btn-secondary" onclick="navigateTo(event, 'book')">О печатной книге</a>
               </div>
               <div class="backdrop-caption">
                 Архивная заставка · Южный Урал, Причаганье, Самарское Поволжье и Псковский край (1736–2026)
@@ -1345,7 +1383,7 @@
                 <button type="button" class="lineage-btn" onclick="openTreeByLineage('Щёлоковы')">
                   <span class="lineage-name">Щёлоковы</span>
                   <span class="lineage-region">Яицкое войско · Оренбуржье</span>
-                </button>
+                </a>
                 <button type="button" class="lineage-btn" onclick="openTreeByLineage('Устиновы')">
                   <span class="lineage-name">Устиновы</span>
                   <span class="lineage-region">Самарская губ. · г. Самара</span>
@@ -1388,7 +1426,7 @@
           </div>
 
           <div class="card-grid">
-            <button type="button" class="archive-card" onclick="navigateTo('tree')">
+            <a href="/tree/" class="archive-card" onclick="navigateTo(event, 'tree')">
               <div class="archive-card-head">
                 <span class="card-num">01</span>
                 <svg class="card-icon" viewBox="0 0 40 40" fill="none" aria-hidden="true">
@@ -1401,9 +1439,9 @@
               <h3>Родословное древо</h3>
               <p class="muted">Поколения, родственные связи, карточки GEDCOM и биографии представителей всех ветвей.</p>
               <span class="archive-card-action">tree / Перейти →</span>
-            </button>
+            </a>
 
-            <button type="button" class="archive-card" onclick="navigateTo('gallery')">
+            <a href="/gallery/" class="archive-card" onclick="navigateTo(event, 'gallery')">
               <div class="archive-card-head">
                 <span class="card-num">02</span>
                 <svg class="card-icon" viewBox="0 0 40 40" fill="none" aria-hidden="true">
@@ -1415,9 +1453,9 @@
               <h3>Фотолетопись</h3>
               <p class="muted">Оцифрованные семейные портреты, снимки совхоза «Ленинский», храмы и подписи на обороте.</p>
               <span class="archive-card-action">gallery / Перейти →</span>
-            </button>
+            </a>
 
-            <button type="button" class="archive-card" onclick="navigateTo('archive')">
+            <a href="/archive/" class="archive-card" onclick="navigateTo(event, 'archive')">
               <div class="archive-card-head">
                 <span class="card-num">03</span>
                 <svg class="card-icon" viewBox="0 0 40 40" fill="none" aria-hidden="true">
@@ -1428,9 +1466,9 @@
               <h3>Архив документов</h3>
               <p class="muted">Ревизские сказки 1765–1850 гг., метрические книги, прошение 1858 г., именной и географический указатели.</p>
               <span class="archive-card-action">archive / Перейти →</span>
-            </button>
+            </a>
 
-            <button type="button" class="archive-card" onclick="navigateTo('archive', 'geo')">
+            <a href="/archive/" class="archive-card" onclick="navigateTo(event, 'archive', 'geo')">
               <div class="archive-card-head">
                 <span class="card-num">04</span>
                 <svg class="card-icon" viewBox="0 0 40 40" fill="none" aria-hidden="true">
@@ -1441,7 +1479,7 @@
               <h3>География семьи</h3>
               <p class="muted">Населённые пункты, координаты поселений, уезды Поволжья, Причаганья и Псковщины.</p>
               <span class="archive-card-action">Географический указатель →</span>
-            </button>
+            </a>
           </div>
 
           <button type="button" 
@@ -1799,11 +1837,11 @@
           <div>
             <p class="label-voice">Разделы сайта</p>
             <div style="display:flex;flex-direction:column;gap:4px;align-items:flex-start;">
-              <button type="button" class="nav-item" style="min-height:36px;padding:4px 0;" onclick="navigateTo('home')">Главная</button>
-              <button type="button" class="nav-item" style="min-height:36px;padding:4px 0;" onclick="navigateTo('tree')">Родословная</button>
-              <button type="button" class="nav-item" style="min-height:36px;padding:4px 0;" onclick="navigateTo('gallery')">Фотогалерея</button>
-              <button type="button" class="nav-item" style="min-height:36px;padding:4px 0;" onclick="navigateTo('archive')">Архив семьи</button>
-              <button type="button" class="nav-item" style="min-height:36px;padding:4px 0;" onclick="navigateTo('book')">Семейная книга</button>
+              <a href="/" class="nav-item" style="min-height:36px;padding:4px 0;display:inline-block;" onclick="navigateTo(event, 'home')">Главная</a>
+              <a href="/tree/" class="nav-item" style="min-height:36px;padding:4px 0;display:inline-block;" onclick="navigateTo(event, 'tree')">Родословная</a>
+              <a href="/gallery/" class="nav-item" style="min-height:36px;padding:4px 0;display:inline-block;" onclick="navigateTo(event, 'gallery')">Фотогалерея</a>
+              <a href="/archive/" class="nav-item" style="min-height:36px;padding:4px 0;display:inline-block;" onclick="navigateTo(event, 'archive')">Архив семьи</a>
+              <a href="/book/" class="nav-item" style="min-height:36px;padding:4px 0;display:inline-block;" onclick="navigateTo(event, 'book')">Семейная книга</a>
             </div>
           </div>
           <div>
@@ -15207,10 +15245,10 @@
       "@I647@"
     ]
   }
-];
+]];
 
     let state = {
-      route: 'home',
+      route: 'book',
       selectedPersonId: 'I378',
       savedPersonIds: [],
       galleryFilter: 'all',
@@ -15231,7 +15269,23 @@
     // =========================================================================
     // НАВИГАЦИЯ И МАРШРУТИЗАЦИЯ (с поддержкой URL и истории)
     // =========================================================================
-    function navigateTo(route, subTab, skipPush) {
+    function detectRouteFromURL() {
+      const path = window.location.pathname.toLowerCase();
+      if (path.includes('/tree')) return 'tree';
+      if (path.includes('/gallery')) return 'gallery';
+      if (path.includes('/archive')) return 'archive';
+      if (path.includes('/book')) return 'book';
+      return 'home';
+    }
+
+    function navigateTo(evt, route, subTab, skipPush) {
+      if (evt && evt.type === 'click') {
+        if (evt.ctrlKey || evt.metaKey || evt.shiftKey || evt.button !== 0) {
+          return; // Allow standard browser new-tab behavior
+        }
+        evt.preventDefault();
+      }
+
       if (!ROUTE_META[route]) route = 'home';
       state.route = route;
 
@@ -15254,17 +15308,8 @@
     }
 
     window.addEventListener('popstate', (e) => {
-      if (e.state && e.state.route) {
-        navigateTo(e.state.route, null, true);
-      } else {
-        const path = window.location.pathname;
-        let route = 'home';
-        if (path.includes('/tree')) route = 'tree';
-        else if (path.includes('/gallery')) route = 'gallery';
-        else if (path.includes('/archive')) route = 'archive';
-        else if (path.includes('/book')) route = 'book';
-        navigateTo(route, null, true);
-      }
+      const route = (e.state && e.state.route) ? e.state.route : detectRouteFromURL();
+      navigateTo(null, route, null, true);
     });
 
     function applyRouteView() {
@@ -15307,7 +15352,7 @@
     }
 
     function openTreeByLineage(lineage) {
-      navigateTo('tree');
+      navigateTo(null, 'tree');
       const sel = document.getElementById('tree-lineage');
       if (sel) {
         sel.value = lineage;
@@ -15603,6 +15648,9 @@
 
     document.addEventListener('DOMContentLoaded', () => {
       loadAppState();
+      // Ensure current route matches actual URL path on page load
+      const urlRoute = detectRouteFromURL();
+      state.route = urlRoute;
       applyStateToUI();
     });
 
