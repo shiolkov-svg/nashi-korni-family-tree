@@ -1237,14 +1237,14 @@
           <a href="/" class="brand-link" onclick="navigateTo(event, 'home')"  aria-label="Сквозь века и судьбы — на главную">
             <span class="brand-title">Сквозь века и судьбы</span>
             <span class="brand-sub">Семейная хроника</span>
-          </button>
+          </a>
 
           <button type="button" class="nav-toggle" id="nav-toggle-btn" aria-expanded="false" aria-controls="primary-nav" onclick="toggleMobileNav()">
             Меню
           </button>
 
           <nav id="primary-nav" class="primary-nav" aria-label="Основная навигация сайта">
-            <a href="/" class="nav-item" data-route="home" class="nav-item active" onclick="navigateTo(event, 'home')">Главная</a>
+            <a href="/" class="nav-item active" data-route="home" class="nav-item" onclick="navigateTo(event, 'home')">Главная</a>
             <span class="nav-middot" aria-hidden="true">·</span>
             <a href="/tree/" class="nav-item" data-route="tree" onclick="navigateTo(event, 'tree')">Родословная</a>
             <span class="nav-middot" aria-hidden="true">·</span>
@@ -1482,7 +1482,7 @@
             </a>
           </div>
 
-          <button type="button" 
+
         </section>
 
         <!-- =========================================================
@@ -16180,7 +16180,7 @@
 
       const navItems = document.querySelectorAll('.primary-nav .nav-item');
       navItems.forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.route === state.route);
+        btn.classList.toggle('active', (btn.getAttribute('data-route') || (btn.dataset && btn.dataset.route)) === state.route);
       });
 
       const meta = ROUTE_META[state.route];
