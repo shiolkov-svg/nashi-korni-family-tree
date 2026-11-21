@@ -1244,7 +1244,7 @@
           </button>
 
           <nav id="primary-nav" class="primary-nav" aria-label="Основная навигация сайта">
-            <a href="/" class="nav-item active" data-route="home" onclick="navigateTo(event, 'home')">Главная</a>
+            <a href="/" class="nav-item" data-route="home" onclick="navigateTo(event, 'home')">Главная</a>
             <span class="nav-middot" aria-hidden="true">·</span>
             <a href="/tree/" class="nav-item" data-route="tree" onclick="navigateTo(event, 'tree')">Родословная</a>
             <span class="nav-middot" aria-hidden="true">·</span>
@@ -1252,7 +1252,7 @@
             <span class="nav-middot" aria-hidden="true">·</span>
             <a href="/archive/" class="nav-item" data-route="archive" onclick="navigateTo(event, 'archive')">Архив семьи</a>
             <span class="nav-middot" aria-hidden="true">·</span>
-            <a href="/book/" class="nav-item" data-route="book" onclick="navigateTo(event, 'book')">Семейная книга</a>
+            <a href="/book/" class="nav-item" data-route="book" class="nav-item active" onclick="navigateTo(event, 'book')">Семейная книга</a>
           </nav>
         </div>
       </div>
@@ -1264,7 +1264,7 @@
         <div class="schema-path">
           <span>nashi-korni.ru</span>
           <span aria-hidden="true">/</span>
-          <span id="current-route-path" class="schema-path-current">Главная</span>
+          <span id="current-route-path" class="schema-path-current">Семейная книга</span>
         </div>
         <div id="current-route-subtitle">Главная страница семейной хроники</div>
       </div>
@@ -1284,7 +1284,7 @@
         <!-- =========================================================
              ГЛАВНАЯ СТРАНИЦА
              ========================================================= -->
-        <section id="view-home" class="view-panel active" aria-labelledby="home-title">
+        <section id="view-home" class="view-panel" aria-labelledby="home-title">
           <!-- Историческая фоновая заставка -->
           <div class="gilt-frame hero-backdrop-box">
             <svg class="hero-engraving-bg" viewBox="0 0 1000 420" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
@@ -1380,38 +1380,38 @@
                 Нажмите на фамилию, чтобы перейти к карточкам предков этого рода в древе.
               </p>
               <div class="lineage-chips">
-                <button type="button" class="lineage-btn" onclick="openTreeByLineage('Щёлоковы')">
+                <a href="/tree/" class="lineage-btn" onclick="openTreeByLineage(event, 'Щёлоковы')">
                   <span class="lineage-name">Щёлоковы</span>
                   <span class="lineage-region">Яицкое войско · Оренбуржье</span>
                 </a>
-                <button type="button" class="lineage-btn" onclick="openTreeByLineage('Устиновы')">
+                <a href="/tree/" class="lineage-btn" onclick="openTreeByLineage(event, 'Устиновы')">
                   <span class="lineage-name">Устиновы</span>
                   <span class="lineage-region">Самарская губ. · г. Самара</span>
-                </button>
-                <button type="button" class="lineage-btn" onclick="openTreeByLineage('Семёновы')">
+                </a>
+                <a href="/tree/" class="lineage-btn" onclick="openTreeByLineage(event, 'Семёновы')">
                   <span class="lineage-name">Семёновы</span>
                   <span class="lineage-region">Псковщина · пос. Ленинский</span>
-                </button>
-                <button type="button" class="lineage-btn" onclick="openTreeByLineage('Домнины')">
+                </a>
+                <a href="/tree/" class="lineage-btn" onclick="openTreeByLineage(event, 'Домнины')">
                   <span class="lineage-name">Домнины</span>
                   <span class="lineage-region">Поволжье · с. Украйна</span>
-                </button>
-                <button type="button" class="lineage-btn" onclick="openTreeByLineage('Неверовы')">
+                </a>
+                <a href="/tree/" class="lineage-btn" onclick="openTreeByLineage(event, 'Неверовы')">
                   <span class="lineage-name">Неверовы</span>
                   <span class="lineage-region">Николаевский уезд · 1782</span>
-                </button>
-                <button type="button" class="lineage-btn" onclick="openTreeByLineage('Алексеевы')">
+                </a>
+                <a href="/tree/" class="lineage-btn" onclick="openTreeByLineage(event, 'Алексеевы')">
                   <span class="lineage-name">Алексеевы</span>
                   <span class="lineage-region">Порховский уезд · Бузулук</span>
-                </button>
-                <button type="button" class="lineage-btn" onclick="openTreeByLineage('Толкачёвы')">
+                </a>
+                <a href="/tree/" class="lineage-btn" onclick="openTreeByLineage(event, 'Толкачёвы')">
                   <span class="lineage-name">Толкачёвы</span>
                   <span class="lineage-region">Поволжье · родственная ветвь</span>
-                </button>
-                <button type="button" class="lineage-btn" onclick="openTreeByLineage('Суровикины')">
+                </a>
+                <a href="/tree/" class="lineage-btn" onclick="openTreeByLineage(event, 'Суровикины')">
                   <span class="lineage-name">Суровикины</span>
                   <span class="lineage-region">Раздел VI хроники</span>
-                </button>
+                </a>
               </div>
             </aside>
           </div>
@@ -1721,7 +1721,7 @@
         <!-- =========================================================
              СЕМЕЙНАЯ КНИГА
              ========================================================= -->
-        <section id="view-book" class="view-panel" aria-labelledby="book-title">
+        <section id="view-book" class="view-panel active" aria-labelledby="book-title">
           <div class="section-title-rule">
             <p class="label-voice">Раздел 04 · Семейная книга</p>
             <h1 id="book-title">Печатное издание книги</h1>
@@ -16216,12 +16216,47 @@
       if (btn) btn.setAttribute('aria-expanded', 'false');
     }
 
-    function openTreeByLineage(lineage) {
+    function openTreeByLineage(evt, lineage) {
+      if (evt && evt.type === 'click') {
+        if (evt.ctrlKey || evt.metaKey || evt.shiftKey || evt.button !== 0) {
+          return;
+        }
+        evt.preventDefault();
+      }
+
+      const lineageKeyPersons = {
+        'Щёлоковы': 'I378',
+        'Устиновы': 'I93',
+        'Семёновы': 'I581',
+        'Домнины': 'I429',
+        'Неверовы': 'I38',
+        'Алексеевы': 'I385',
+        'Толкачёвы': 'I436',
+        'Суровикины': 'I145'
+      };
+
       navigateTo(null, 'tree');
+
       const sel = document.getElementById('tree-lineage');
       if (sel) {
         sel.value = lineage;
-        filterPersons();
+      }
+
+      const targetId = lineageKeyPersons[lineage];
+      if (targetId) {
+        const targetPerson = PERSONS.find(p => p.id === targetId);
+        if (targetPerson) {
+          state.selectedPersonId = targetId;
+          renderDynamicTree(targetPerson);
+          renderDossier(targetPerson);
+        }
+      }
+
+      filterPersons();
+
+      const treeView = document.getElementById('view-tree');
+      if (treeView) {
+        treeView.scrollIntoView({ behavior: 'smooth' });
       }
     }
 
