@@ -17878,40 +17878,52 @@
     function getAssetPath(path) {
       if (!path) return '';
       if (path.startsWith('http://') || path.startsWith('https://') || path.startsWith('//')) return path;
-      const cleanPath = path.replace(/^\//, '');
+      let clean = path.replace(/^\/+/, '').replace(/^\.\//, '');
       const pathName = window.location.pathname.toLowerCase();
-      if (pathName.includes('/tree/') || pathName.includes('/gallery/') || pathName.includes('/archive/') || pathName.includes('/book/')) {
-        return '../' + cleanPath;
+      const isSubRoute = /\/(tree|gallery|archive|book)(\/|$|\?|#)/i.test(pathName);
+      if (isSubRoute) {
+        return '../' + clean;
       }
-      return cleanPath;
+      return clean;
     }
 
     
     function handleImgError(img) {
       if (!img) return;
       const currentSrc = img.getAttribute('src') || '';
-      const attempted = img.dataset.attemptedCount ? intVal(img.dataset.attemptedCount) : 0;
+      let attempted = parseInt(img.dataset.attemptedCount || '0', 10);
       
-      // Try resolving variations if default path failed
-      const match = currentSrc.match(/photo_(\d+)_([a-z]+)\.([a-z]+)$/i);
-      if (match && attempted < 4) {
-        const num = parseInt(match[1], 10);
-        const side = match[2];
-        const dir = currentSrc.substring(0, currentSrc.lastIndexOf('/') + 1);
+      const numMatch = currentSrc.match(/photo_(\d+)/i);
+      const sideMatch = currentSrc.match(/_(front|back)\b/i);
+      const side = sideMatch ? sideMatch[1].toLowerCase() : 'front';
+      
+      if (numMatch && attempted < 12) {
+        const num = parseInt(numMatch[1], 10);
+        const dirMatch = currentSrc.match(/^(.*\/)/);
+        const dir = dirMatch ? dirMatch[1] : 'assets/photos/';
         
-        const pad3 = String(num).padStart(3, '0');
-        const pad5 = String(num).padStart(5, '0');
-        const pad4 = String(num).padStart(4, '0');
-        
-        const variants = [
-          `${dir}photo_${pad3}_${side}.jpeg`,
-          `${dir}photo_${pad3}_${side}.jpg`,
-          `${dir}photo_${pad3}_${side}.JPG`,
-          `${dir}photo_${pad5}_${side}.jpeg`,
-          `${dir}photo_${pad4}_${side}.jpeg`
+        const pads = [
+          String(num).padStart(5, '0'),
+          String(num).padStart(3, '0'),
+          String(num).padStart(4, '0'),
+          String(num)
         ];
         
-        const nextSrc = variants.find(v => v !== currentSrc && (!img.dataset.tried || !img.dataset.tried.includes(v)));
+        const sides = side === 'back' ? ['_back', ''] : ['_' + side, '', '_front'];
+        const exts = ['.jpeg', '.jpg', '.JPG', '.JPEG', '.png', '.PNG'];
+        
+        const candidates = [];
+        for (const p of pads) {
+          for (const s of sides) {
+            for (const e of exts) {
+              candidates.push(`${dir}photo_${p}${s}${e}`);
+            }
+          }
+        }
+        
+        const tried = (img.dataset.tried || '').split('|');
+        const nextSrc = candidates.find(v => v !== currentSrc && !tried.includes(v));
+        
         if (nextSrc) {
           img.dataset.attemptedCount = String(attempted + 1);
           img.dataset.tried = (img.dataset.tried || '') + '|' + nextSrc;
@@ -17920,10 +17932,12 @@
         }
       }
       
-      // Fallback if all attempts fail
       img.onerror = null;
-      if (img.parentElement) {
-        img.parentElement.innerHTML = '<div style="padding:var(--space-md);text-align:center;color:var(--muted);font-size:0.85rem;">🖼️ [Оцифрованный снимок из архива]</div>';
+      img.style.display = 'none';
+      const box = img.parentElement;
+      if (box && !box.querySelector('.photo-placeholder-frame')) {
+        const code = img.getAttribute('alt') || 'Архивный снимок';
+        box.insertAdjacentHTML('beforeend', `<div class="photo-placeholder-frame" style="padding:var(--space-md);text-align:center;color:var(--earth);font-family:var(--font-headline);font-size:0.88rem;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;width:100%;height:100%;background:linear-gradient(135deg, var(--paper) 0%, var(--paper-deep) 100%);border:1px dashed var(--earth);border-radius:4px;"><span style="font-size:1.6rem;line-height:1;">📷</span><strong style="color:var(--primary);">${code}</strong><span style="font-size:0.75rem;color:var(--muted);font-style:italic;">[Архивный снимок из альбома]</span></div>`);
       }
     }
 
