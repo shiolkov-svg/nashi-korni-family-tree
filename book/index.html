@@ -1284,7 +1284,7 @@
         <!-- =========================================================
              ГЛАВНАЯ СТРАНИЦА
              ========================================================= -->
-        <section id="view-home" class="view-panel" aria-labelledby="home-title">
+        <section id="view-home" class="view-panel active" aria-labelledby="home-title">
           <!-- Историческая фоновая заставка -->
           <div class="gilt-frame hero-backdrop-box">
             <svg class="hero-engraving-bg" viewBox="0 0 1000 420" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
@@ -1747,7 +1747,7 @@
         <!-- =========================================================
              СЕМЕЙНАЯ КНИГА
              ========================================================= -->
-        <section id="view-book" class="view-panel active" aria-labelledby="book-title">
+        <section id="view-book" class="view-panel" aria-labelledby="book-title">
           <div class="section-title-rule">
             <p class="label-voice">Раздел 04 · Семейная книга</p>
             <h1 id="book-title">Печатное издание книги</h1>
@@ -17754,64 +17754,94 @@
     // =========================================================================
     const PHOTOS = [
       {
-        id: "ph_001",
-        code: "ФОТО-1916-01",
-        title: "Иоаким Алексеевич Алексеев с дочерью Матрёной",
-        year: "1916 г.",
-        place: "г. Самара, фотоателье на Дворянской",
-        lineage: "Алексеевы",
-        cat: "portraits",
-        imgFront: "/assets/photos/photo_001_front.jpg",
-        imgBack: "/assets/photos/photo_001_back.jpg",
-        hasBack: true,
-        transcript: "«На добрую и долгую память любимой сестре Матрёне от брата Иоакима. г. Самара, 14 августа 1916 г. Фотографія И.И. Иванова на Дворянской»",
-        desc: "Портрет Иоакима Алексеевича Алексеева с дочерью Матрёной (в замужестве Семёновой), сделанный перед отправкой на фронт.",
-        personIds: ["I544", "I455"]
-      },
-      {
-        id: "ph_002",
-        code: "ФОТО-1941-02",
-        title: "Труженики и механизаторы совхоза «Ленинский»",
-        year: "1941 г.",
-        place: "п. Ленинский, Оренбургская обл.",
+        id: "ph_00006",
+        code: "ФОТО-00006",
+        title: "Щёлков Николай Иванович",
+        year: "1964 г.",
+        place: "г. Куйбышев",
         lineage: "Щёлоковы",
-        cat: "life",
-        imgFront: "/assets/photos/photo_002_front.jpg",
-        imgBack: "/assets/photos/photo_002_back.jpg",
+        cat: "portraits",
+        imgFront: "assets/photos/photo_00006_front.jpeg",
+        imgBack: "assets/photos/photo_00006_back.jpeg",
         hasBack: true,
-        transcript: "«Дорогим родным в память о лете 1941 года. На уборке урожая. Иван Сергеевич и товарищи»",
-        desc: "Групповая фотография механизаторов и трактористов совхоза «Ленинский» на фоне техники.",
-        personIds: ["I489", "I457"]
+        transcript: "«На память брату Сереже от брата Николая в дни нашей службы.»",
+        desc: "Портрет Николая Ивановича Щёлкова во время прохождения военной службы.",
+        personIds: ["I457", "I471"]
       },
       {
-        id: "ph_003",
-        code: "ФОТО-1912-03",
-        title: "Семья Устиновых и Щёлоковых",
-        year: "1912 г.",
-        place: "х. Плаксин / с. Вязовка",
-        lineage: "Устиновы",
+        id: "ph_00076",
+        code: "ФОТО-00076",
+        title: "Семёнова Матрёна Иоакимовна",
+        year: "ок. 1934 г.",
+        place: "г. Порхов, Псковская обл.",
+        lineage: "Семёновы",
         cat: "portraits",
-        imgFront: "/assets/photos/photo_003_front.jpg",
-        imgBack: "",
+        imgFront: "assets/photos/photo_00076_front.jpeg",
+        imgBack: "assets/photos/photo_00076_back.jpeg",
         hasBack: false,
         transcript: "",
-        desc: "Семейный снимок купеческо-мещанской ветви Устиновых после переезда на хутор Плаксин.",
-        personIds: ["I518", "I501", "I436"]
+        desc: "Студийный портрет Матрёны Иоакимовны Семёновой (в девичестве Алексеевой).",
+        personIds: ["I455"]
       },
       {
-        id: "ph_004",
-        code: "ФОТО-1968-04",
-        title: "Сергей Иванович Щёлков на Всесоюзных соревнованиях",
-        year: "1968 г.",
-        place: "г. Тарту, Эстонская ССР",
+        id: "ph_00109",
+        code: "ФОТО-00109",
+        title: "Семёнов Павел Васильевич",
+        year: "1945 г.",
+        place: "Псковская обл. / Фронт",
+        lineage: "Семёновы",
+        cat: "life",
+        imgFront: "assets/photos/photo_00109_front.jpeg",
+        imgBack: "assets/photos/photo_00109_back.jpeg",
+        hasBack: false,
+        transcript: "",
+        desc: "Павел Васильевич Семёнов в военной форме в победном 1945 году.",
+        personIds: ["I581"]
+      },
+      {
+        id: "ph_00119",
+        code: "ФОТО-00119",
+        title: "Устинов Алексей Иванович",
+        year: "ок. 1904 г.",
+        place: "г. Самара / х. Плаксин",
+        lineage: "Устиновы",
+        cat: "portraits",
+        imgFront: "assets/photos/photo_00119_front.jpeg",
+        imgBack: "assets/photos/photo_00119_back.jpeg",
+        hasBack: false,
+        transcript: "",
+        desc: "Портрет Алексея Ивановича Устинова.",
+        personIds: ["I518"]
+      },
+      {
+        id: "ph_00172",
+        code: "ФОТО-00172",
+        title: "Щёлков Иван Сергеевич с супругой Прасковьей Алексеевной",
+        year: "1934 г.",
+        place: "х. Плаксин / с. Вязовка",
+        lineage: "Щёлоковы",
+        cat: "portraits",
+        imgFront: "assets/photos/photo_00172_front.jpeg",
+        imgBack: "assets/photos/photo_00172_back.jpeg",
+        hasBack: false,
+        transcript: "",
+        desc: "Семейный портрет Ивана Сергеевича Щёлкова и Прасковьи Алексеевны (урождённой Устиновой).",
+        personIds: ["I489", "I501"]
+      },
+      {
+        id: "ph_00187",
+        code: "ФОТО-00187",
+        title: "Щёлков Сергей Иванович с товарищами",
+        year: "ок. 1966 г.",
+        place: "п. Малаховка, Московская обл.",
         lineage: "Щёлоковы",
         cat: "life",
-        imgFront: "/assets/photos/photo_004_front.jpg",
-        imgBack: "/assets/photos/photo_004_back.jpg",
+        imgFront: "assets/photos/photo_00187_front.jpeg",
+        imgBack: "assets/photos/photo_00187_back.jpeg",
         hasBack: true,
-        transcript: "«Тарту, май 1968 г. После установления личного рекорда в десятиборье (7705 очков). На память брату Николаю»",
-        desc: "Сергей Иванович Щёлков — член сборной СССР по десятиборью, рекордсмен и тренер.",
-        personIds: ["I471", "I457"]
+        transcript: "«После забега. Федору от Щелкова»",
+        desc: "Сергей Иванович Щёлков с товарищами-спортсменами после соревнований.",
+        personIds: ["I471", "I578"]
       }
     ];
 
@@ -17829,6 +17859,18 @@
       persistAppState();
     }
 
+    
+    function getAssetPath(path) {
+      if (!path) return '';
+      if (path.startsWith('http://') || path.startsWith('https://') || path.startsWith('//')) return path;
+      const cleanPath = path.replace(/^\//, '');
+      const pathName = window.location.pathname.toLowerCase();
+      if (pathName.includes('/tree/') || pathName.includes('/gallery/') || pathName.includes('/archive/') || pathName.includes('/book/')) {
+        return '../' + cleanPath;
+      }
+      return cleanPath;
+    }
+
     function renderGallery() {
       const grid = document.getElementById('photo-grid');
       if (!grid) return;
@@ -17836,6 +17878,7 @@
       const items = PHOTOS.filter(p => state.galleryFilter === 'all' || p.cat === state.galleryFilter);
 
       grid.innerHTML = items.map(p => {
+        const srcFront = getAssetPath(p.imgFront);
         const badgeBack = p.hasBack ? `<span class="tag" style="background:var(--primary-container);color:var(--primary);border:1px solid var(--primary);font-size:0.75rem;">✍️ Есть надпись на обороте</span>` : '';
         
         const relLinks = (p.personIds || []).map(id => {
@@ -17852,7 +17895,7 @@
             </div>
             
             <div class="photo-plate-box" style="position:relative;width:100%;height:220px;background:var(--surface-container);border:1px solid var(--outline);border-radius:4px;overflow:hidden;margin-bottom:var(--space-sm);display:flex;align-items:center;justify-content:center;">
-              <img src="${p.imgFront}" alt="${p.title}" style="max-width:100%;max-height:100%;object-fit:contain;" onerror="this.onerror=null;this.parentElement.innerHTML='<div style="padding:var(--space-md);text-align:center;color:var(--muted);font-size:0.85rem;">🖼️ [Оцифрованный снимок из архива]</div>';">
+              <img src="${srcFront}" alt="${p.title}" style="max-width:100%;max-height:100%;object-fit:contain;" onerror="this.onerror=null;this.parentElement.innerHTML='<div style="padding:var(--space-md);text-align:center;color:var(--muted);font-size:0.85rem;">🖼️ [Оцифрованный снимок из архива]</div>';">
             </div>
 
             <h3 style="font-family:var(--font-headline);font-size:1.15rem;margin-bottom:var(--space-xs);color:var(--primary);">${p.title}</h3>
@@ -17872,6 +17915,8 @@
     function openLightbox(photoId) {
       const p = PHOTOS.find(x => x.id === photoId);
       if (!p) return;
+      state.lightboxCurrentSide = 'front';
+      const srcFront = getAssetPath(p.imgFront);
 
       const panel = document.getElementById('gallery-lightbox');
       const codeEl = document.getElementById('lb-code');
@@ -17896,10 +17941,10 @@
       }
 
       if (plateEl) {
-        const backBtn = p.hasBack ? `<button type="button" class="btn btn-secondary" style="font-size:0.8rem;padding:4px 12px;margin-top:var(--space-xs);" onclick="toggleLightboxSide('${p.id}')">🔄 Перевернуть на оборот</button>` : '';
+        const backBtn = p.hasBack ? `<button type="button" class="btn btn-secondary" style="font-size:0.8rem;padding:4px 12px;margin-top:var(--space-xs);" onclick="toggleLightboxSide('${p.id}')">🔄 Перевернуть на оборот (<span id="lb-side-label">Лицевая сторона</span>)</button>` : '';
         plateEl.innerHTML = `
           <div style="display:flex;flex-direction:column;align-items:center;width:100%;">
-            <img id="lb-main-img" src="${p.imgFront}" alt="${p.title}" style="max-width:100%;max-height:380px;object-fit:contain;border-radius:4px;border:1px solid var(--outline);" onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+            <img id="lb-main-img" src="${srcFront}" alt="${p.title}" style="max-width:100%;max-height:380px;object-fit:contain;border-radius:4px;border:1px solid var(--outline);" onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
             <div style="display:none;padding:var(--space-lg);text-align:center;background:var(--surface-container);border:1px solid var(--outline);border-radius:4px;">🖼️ [Оригинал оцифрованного снимка из альбома]</div>
             ${backBtn}
           </div>
@@ -17915,12 +17960,19 @@
     function toggleLightboxSide(photoId) {
       const p = PHOTOS.find(x => x.id === photoId);
       const imgEl = document.getElementById('lb-main-img');
+      const sideLabel = document.getElementById('lb-side-label');
       if (!p || !imgEl) return;
 
-      if (imgEl.src.includes(p.imgFront)) {
-        imgEl.src = p.imgBack;
+      if (!state.lightboxCurrentSide) state.lightboxCurrentSide = 'front';
+
+      if (state.lightboxCurrentSide === 'front') {
+        state.lightboxCurrentSide = 'back';
+        imgEl.src = getAssetPath(p.imgBack);
+        if (sideLabel) sideLabel.textContent = 'Обратная сторона (рукопись)';
       } else {
-        imgEl.src = p.imgFront;
+        state.lightboxCurrentSide = 'front';
+        imgEl.src = getAssetPath(p.imgFront);
+        if (sideLabel) sideLabel.textContent = 'Лицевая сторона';
       }
     }
 
