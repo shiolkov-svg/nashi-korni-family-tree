@@ -1219,7 +1219,78 @@
     .btn, .btn *, .lineage-btn, .lineage-btn *, .rel-chip, .person-card, .tree-node-btn {
       text-decoration: none !important;
     }
-</style>
+
+    .person-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      max-width: 100%;
+      padding: 4px 10px;
+      border: 1px solid var(--primary);
+      border-radius: var(--rounded-full);
+      font-family: var(--sans);
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--primary);
+      background: var(--surface-container-low);
+      white-space: normal;
+      word-break: break-word;
+      text-align: left;
+      line-height: 1.3;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-sizing: border-box;
+    }
+    .person-tag:hover {
+      background: var(--primary-container);
+      border-color: var(--primary);
+    }
+
+
+    .fullscreen-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      background: rgba(18, 16, 14, 0.95);
+      backdrop-filter: blur(8px);
+      display: flex;
+      flex-direction: column;
+      padding: var(--space-md);
+      box-sizing: border-box;
+    }
+    .fullscreen-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-md);
+      padding-bottom: var(--space-sm);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+      margin-bottom: var(--space-md);
+      color: var(--white);
+    }
+    .fullscreen-title {
+      font-family: var(--font-headline);
+      font-size: 1.1rem;
+      color: #fbf9f5;
+    }
+    .fullscreen-body {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: auto;
+    }
+    .fullscreen-body img {
+      max-width: 95vw;
+      max-height: 85vh;
+      object-fit: contain;
+      border-radius: 6px;
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.8);
+      cursor: zoom-out;
+      transition: transform 0.2s ease;
+    }
+
+  </style>
 </head>
 <body>
   <div class="site-shell">
@@ -17226,7 +17297,7 @@
 ];
 
     let state = {
-      route: 'home',
+      route: 'gallery',
       selectedPersonId: 'I378',
       savedPersonIds: [],
       galleryFilter: 'all',
@@ -18066,5 +18137,21 @@ function applyStateToUI() {
     }
 
   </script>
+
+  <!-- Полноэкранный модальный просмотрщик изображений (Fullscreen Modal) -->
+  <div id="fullscreen-modal" class="fullscreen-modal" style="display:none;" onclick="closeFullscreenModal(event)">
+    <div class="fullscreen-header" onclick="event.stopPropagation();">
+      <span id="fs-title" class="fullscreen-title"></span>
+      <div style="display:flex;gap:var(--space-xs);align-items:center;">
+        <button type="button" class="btn btn-secondary" id="fs-toggle-side" style="display:none;font-size:0.8rem;padding:4px 12px;" onclick="toggleFullscreenSide()">🔄 Перевернуть</button>
+        <a id="fs-download" href="#" target="_blank" rel="noopener" class="btn btn-subtle" style="font-size:0.8rem;padding:4px 12px;text-decoration:none;">🔗 Открыть оригинал</a>
+        <button type="button" class="btn btn-subtle" style="font-size:1.2rem;line-height:1;padding:4px 12px;" onclick="closeFullscreenModal()">✕</button>
+      </div>
+    </div>
+    <div class="fullscreen-body" onclick="closeFullscreenModal()">
+      <img id="fs-img" src="" alt="" onclick="event.stopPropagation();" onerror="handleImgError(this);">
+    </div>
+  </div>
+
 </body>
 </html>
