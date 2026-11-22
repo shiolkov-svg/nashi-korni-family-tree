@@ -17754,6 +17754,21 @@
     // =========================================================================
     const PHOTOS = [
       {
+        id: "ph_00001",
+        code: "ФОТО-00001",
+        title: "Семейный снимок",
+        year: "Архив",
+        place: "Поволжье",
+        lineage: "Щёлоковы",
+        cat: "portraits",
+        imgFront: "assets/photos/photo_001_front.jpeg",
+        imgBack: "assets/photos/photo_001_back.jpeg",
+        hasBack: true,
+        transcript: "",
+        desc: "Архивный семейный фотоснимок.",
+        personIds: []
+      },
+      {
         id: "ph_00006",
         code: "ФОТО-00006",
         title: "Щёлков Николай Иванович",
@@ -17761,8 +17776,8 @@
         place: "г. Куйбышев",
         lineage: "Щёлоковы",
         cat: "portraits",
-        imgFront: "assets/photos/photo_00006_front.jpeg",
-        imgBack: "assets/photos/photo_00006_back.jpeg",
+        imgFront: "assets/photos/photo_006_front.jpeg",
+        imgBack: "assets/photos/photo_006_back.jpeg",
         hasBack: true,
         transcript: "«На память брату Сереже от брата Николая в дни нашей службы.»",
         desc: "Портрет Николая Ивановича Щёлкова во время прохождения военной службы.",
@@ -17776,8 +17791,8 @@
         place: "г. Порхов, Псковская обл.",
         lineage: "Семёновы",
         cat: "portraits",
-        imgFront: "assets/photos/photo_00076_front.jpeg",
-        imgBack: "assets/photos/photo_00076_back.jpeg",
+        imgFront: "assets/photos/photo_076_front.jpeg",
+        imgBack: "assets/photos/photo_076_back.jpeg",
         hasBack: false,
         transcript: "",
         desc: "Студийный портрет Матрёны Иоакимовны Семёновой (в девичестве Алексеевой).",
@@ -17791,8 +17806,8 @@
         place: "Псковская обл. / Фронт",
         lineage: "Семёновы",
         cat: "life",
-        imgFront: "assets/photos/photo_00109_front.jpeg",
-        imgBack: "assets/photos/photo_00109_back.jpeg",
+        imgFront: "assets/photos/photo_109_front.jpeg",
+        imgBack: "assets/photos/photo_109_back.jpeg",
         hasBack: false,
         transcript: "",
         desc: "Павел Васильевич Семёнов в военной форме в победном 1945 году.",
@@ -17803,11 +17818,11 @@
         code: "ФОТО-00119",
         title: "Устинов Алексей Иванович",
         year: "ок. 1904 г.",
-        place: "г. Самара / х. Плаксин",
+        place: "г. Самара",
         lineage: "Устиновы",
         cat: "portraits",
-        imgFront: "assets/photos/photo_00119_front.jpeg",
-        imgBack: "assets/photos/photo_00119_back.jpeg",
+        imgFront: "assets/photos/photo_119_front.jpeg",
+        imgBack: "assets/photos/photo_119_back.jpeg",
         hasBack: false,
         transcript: "",
         desc: "Портрет Алексея Ивановича Устинова.",
@@ -17818,14 +17833,14 @@
         code: "ФОТО-00172",
         title: "Щёлков Иван Сергеевич с супругой Прасковьей Алексеевной",
         year: "1934 г.",
-        place: "х. Плаксин / с. Вязовка",
+        place: "Поволжье",
         lineage: "Щёлоковы",
         cat: "portraits",
-        imgFront: "assets/photos/photo_00172_front.jpeg",
-        imgBack: "assets/photos/photo_00172_back.jpeg",
+        imgFront: "assets/photos/photo_172_front.jpeg",
+        imgBack: "assets/photos/photo_172_back.jpeg",
         hasBack: false,
         transcript: "",
-        desc: "Семейный портрет Ивана Сергеевича Щёлкова и Прасковьи Алексеевны (урождённой Устиновой).",
+        desc: "Портрет Ивана Сергеевича Щёлкова с супругой Прасковьей Алексеевной (в девичестве Устиновой).",
         personIds: ["I489", "I501"]
       },
       {
@@ -17836,11 +17851,11 @@
         place: "п. Малаховка, Московская обл.",
         lineage: "Щёлоковы",
         cat: "life",
-        imgFront: "assets/photos/photo_00187_front.jpeg",
-        imgBack: "assets/photos/photo_00187_back.jpeg",
+        imgFront: "assets/photos/photo_187_front.jpeg",
+        imgBack: "assets/photos/photo_187_back.jpeg",
         hasBack: true,
         transcript: "«После забега. Федору от Щелкова»",
-        desc: "Сергей Иванович Щёлков с товарищами-спортсменами после соревнований.",
+        desc: "Щёлков Сергей Иванович с товарищами после соревнований.",
         personIds: ["I471", "I578"]
       }
     ];
@@ -17871,6 +17886,47 @@
       return cleanPath;
     }
 
+    
+    function handleImgError(img) {
+      if (!img) return;
+      const currentSrc = img.getAttribute('src') || '';
+      const attempted = img.dataset.attemptedCount ? intVal(img.dataset.attemptedCount) : 0;
+      
+      // Try resolving variations if default path failed
+      const match = currentSrc.match(/photo_(\d+)_([a-z]+)\.([a-z]+)$/i);
+      if (match && attempted < 4) {
+        const num = parseInt(match[1], 10);
+        const side = match[2];
+        const dir = currentSrc.substring(0, currentSrc.lastIndexOf('/') + 1);
+        
+        const pad3 = String(num).padStart(3, '0');
+        const pad5 = String(num).padStart(5, '0');
+        const pad4 = String(num).padStart(4, '0');
+        
+        const variants = [
+          `${dir}photo_${pad3}_${side}.jpeg`,
+          `${dir}photo_${pad3}_${side}.jpg`,
+          `${dir}photo_${pad3}_${side}.JPG`,
+          `${dir}photo_${pad5}_${side}.jpeg`,
+          `${dir}photo_${pad4}_${side}.jpeg`
+        ];
+        
+        const nextSrc = variants.find(v => v !== currentSrc && (!img.dataset.tried || !img.dataset.tried.includes(v)));
+        if (nextSrc) {
+          img.dataset.attemptedCount = String(attempted + 1);
+          img.dataset.tried = (img.dataset.tried || '') + '|' + nextSrc;
+          img.src = nextSrc;
+          return;
+        }
+      }
+      
+      // Fallback if all attempts fail
+      img.onerror = null;
+      if (img.parentElement) {
+        img.parentElement.innerHTML = '<div style="padding:var(--space-md);text-align:center;color:var(--muted);font-size:0.85rem;">🖼️ [Оцифрованный снимок из архива]</div>';
+      }
+    }
+
     function renderGallery() {
       const grid = document.getElementById('photo-grid');
       if (!grid) return;
@@ -17895,7 +17951,7 @@
             </div>
             
             <div class="photo-plate-box" style="position:relative;width:100%;height:220px;background:var(--surface-container);border:1px solid var(--outline);border-radius:4px;overflow:hidden;margin-bottom:var(--space-sm);display:flex;align-items:center;justify-content:center;">
-              <img src="${srcFront}" alt="${p.title}" style="max-width:100%;max-height:100%;object-fit:contain;" onerror="this.onerror=null;this.parentElement.innerHTML='<div style="padding:var(--space-md);text-align:center;color:var(--muted);font-size:0.85rem;">🖼️ [Оцифрованный снимок из архива]</div>';">
+              <img src="${srcFront}" alt="${p.title}" style="max-width:100%;max-height:100%;object-fit:contain;" onerror="handleImgError(this);">
             </div>
 
             <h3 style="font-family:var(--font-headline);font-size:1.15rem;margin-bottom:var(--space-xs);color:var(--primary);">${p.title}</h3>
@@ -17944,7 +18000,7 @@
         const backBtn = p.hasBack ? `<button type="button" class="btn btn-secondary" style="font-size:0.8rem;padding:4px 12px;margin-top:var(--space-xs);" onclick="toggleLightboxSide('${p.id}')">🔄 Перевернуть на оборот (<span id="lb-side-label">Лицевая сторона</span>)</button>` : '';
         plateEl.innerHTML = `
           <div style="display:flex;flex-direction:column;align-items:center;width:100%;">
-            <img id="lb-main-img" src="${srcFront}" alt="${p.title}" style="max-width:100%;max-height:380px;object-fit:contain;border-radius:4px;border:1px solid var(--outline);" onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+            <img id="lb-main-img" src="${srcFront}" alt="${p.title}" style="max-width:100%;max-height:380px;object-fit:contain;border-radius:4px;border:1px solid var(--outline);" onerror="handleImgError(this);">
             <div style="display:none;padding:var(--space-lg);text-align:center;background:var(--surface-container);border:1px solid var(--outline);border-radius:4px;">🖼️ [Оригинал оцифрованного снимка из альбома]</div>
             ${backBtn}
           </div>
