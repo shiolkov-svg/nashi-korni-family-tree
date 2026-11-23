@@ -1291,6 +1291,8 @@
     }
 
   </style>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </head>
 <body>
   <div class="site-shell">
@@ -1323,6 +1325,7 @@
             <span class="nav-middot" aria-hidden="true">·</span>
             <a href="/archive/" class="nav-item" data-route="archive" onclick="navigateTo(event, 'archive')">Архив семьи</a>
             <span class="nav-middot" aria-hidden="true">·</span>
+            <a href="/maps/" class="nav-item" data-route="maps" onclick="navigateTo(event, 'maps')">Карты родов</a>
             <a href="/book/" class="nav-item" data-route="book" onclick="navigateTo(event, 'book')">Семейная книга</a>
           </nav>
         </div>
@@ -1701,6 +1704,42 @@
         <!-- =========================================================
              АРХИВ СЕМЬИ
              ========================================================= -->
+        
+        <!-- =========================================================
+             КАРТЫ РОДОВ (ГЕОГРАФИЯ И ПАМЯТНЫЕ МЕСТА)
+             ========================================================= -->
+        <section id="view-maps" class="view-panel" aria-labelledby="maps-title">
+          <div class="section-title-rule">
+            <p class="label-voice">Раздел 03 · География родов</p>
+            <h1 id="maps-title">Карта памятных мест семьи</h1>
+            <p class="muted" style="max-width:760px;">
+              Простой и наглядный путеводитель по историческим сёлам, хуторам, казачьим форпостам и современным городам проживания предков родов Щёлоковых, Домниных, Устиновых, Семёновых и связанных семей.
+            </p>
+          </div>
+
+          <!-- Простые и понятные фильтры для всех возрастов -->
+          <div class="pill-tabs" role="tablist" aria-label="Фильтр памятных мест">
+            <button type="button" class="pill-tab active" data-mapfilter="all" onclick="filterMapPoints('all', this)">📍 Все памятные места</button>
+            <button type="button" class="pill-tab" data-mapfilter="historical" onclick="filterMapPoints('historical', this)">🌾 Истоки и хутора (до 1917 г.)</button>
+            <button type="button" class="pill-tab" data-mapfilter="soviet" onclick="filterMapPoints('soviet', this)">🚜 Совхоз «Ленинский» (1918–1960 гг.)</button>
+            <button type="button" class="pill-tab" data-mapfilter="modern" onclick="filterMapPoints('modern', this)">🏙️ Современность (1960–2026 гг.)</button>
+          </div>
+
+          <!-- Интерактивная карта -->
+          <div id="family-map-box" style="position:relative;width:100%;height:460px;background:var(--surface-container);border:1px solid var(--outline-variant);border-radius:var(--rounded);overflow:hidden;margin-bottom:var(--space-lg);box-shadow:0 4px 12px rgba(0,0,0,0.05);">
+            <div id="map-leaflet" style="width:100%;height:100%;z-index:1;"></div>
+          </div>
+
+          <!-- Наглядные карточки мест (для чтения без карты) -->
+          <div style="margin-bottom:var(--space-md);display:flex;justify-content:space-between;align-items:center;">
+            <h2 style="font-family:var(--font-headline);font-size:1.35rem;color:var(--primary);margin:0;">📜 Перечень памятных мест родов</h2>
+            <span class="muted" style="font-size:0.875rem;">Показано мест: <strong id="map-places-count">0</strong></span>
+          </div>
+          
+          <div id="places-grid" style="display:grid;grid-template-columns:repeat(auto-fill, minmax(300px, 1fr));gap:var(--space-md);"></div>
+        </section>
+
+
         <section id="view-archive" class="view-panel" aria-labelledby="archive-title">
           <div class="section-title-rule">
             <p class="label-voice">Раздел 03 · Архив семьи</p>
@@ -1938,7 +1977,8 @@
               <a href="/tree/" class="nav-item" style="min-height:36px;padding:4px 0;display:inline-block;" onclick="navigateTo(event, 'tree')">Родословная</a>
               <a href="/gallery/" class="nav-item" style="min-height:36px;padding:4px 0;display:inline-block;" onclick="navigateTo(event, 'gallery')">Фотогалерея</a>
               <a href="/archive/" class="nav-item" style="min-height:36px;padding:4px 0;display:inline-block;" onclick="navigateTo(event, 'archive')">Архив семьи</a>
-              <a href="/book/" class="nav-item" style="min-height:36px;padding:4px 0;display:inline-block;" onclick="navigateTo(event, 'book')">Семейная книга</a>
+              <a href="/maps/" class="nav-item" style="min-height:36px;padding:4px 0;display:inline-block;" onclick="navigateTo(event, 'book')">Карты родов</a>
+            <a href="/book/" class="nav-item" style="min-height:36px;padding:4px 0;display:inline-block;" onclick="navigateTo(event, 'book')">Семейная книга</a>
             </div>
           </div>
           <div>
@@ -17389,6 +17429,7 @@
       if (path.includes('/tree')) return 'tree';
       if (path.includes('/gallery')) return 'gallery';
       if (path.includes('/archive')) return 'archive';
+      if (path.includes('/maps')) return 'maps';
       if (path.includes('/book')) return 'book';
       return 'home';
     }
@@ -20852,6 +20893,119 @@
       const panel = document.getElementById('gallery-lightbox');
       if (panel) panel.style.display = 'none';
     }
+
+
+    /* MAPS LOGIC & DATA */
+    const MAP_PLACES = [
+      { id: "p1", code: "МЕСТО-01", title: "посёлок Ленинский", region: "Первомайский р-н, Оренбургская обл.", cat: "modern", lat: 51.879, lng: 51.644, lineages: ["Щёлоковы", "Домнины"], desc: "Центральная усадьба совхоза «Ленинский». Основное место проживания нескольких поколений семей Щёлоковых и Домниных во второй половине XX – XXI вв.", personIds: ["I457", "I434", "I509", "I543", "I482"] },
+      { id: "p2", code: "МЕСТО-02", title: "село Лаврентьевка", region: "Бузулукский уезд / Курманаевский р-н, Оренбургская обл.", cat: "historical", lat: 52.793, lng: 52.378, lineages: ["Домнины", "Щёлоковы"], desc: "Историческое село в Бузулукском уезде. Родовое гнездо нескольких поколений крестьян Домниных и ранних ветвей Щёлоковых до конца 1940-х годов.", personIds: ["I482", "I613"] },
+      { id: "p3", code: "МЕСТО-03", title: "посёлок Осочный", region: "Первомайский р-н, Оренбургская обл.", cat: "soviet", lat: 51.912, lng: 51.720, lineages: ["Домнины"], desc: "Место первого советского переселения семьи Домниных (конец 1940-х – начало 1960-х гг.) перед окончательным обустройством в п. Ленинский.", personIds: ["I482", "I613"] },
+      { id: "p4", code: "МЕСТО-04", title: "хутор Плаксин / село Вязовка", region: "Бузулукский / Ташлинский р-н, Оренбургская обл.", cat: "historical", lat: 51.802, lng: 52.810, lineages: ["Устиновы", "Щёлоковы"], desc: "Родовое место мещанско-купеческой ветви Устиновых и место проживания Прасковьи Алексеевны Устиновой (в замужестве Щёлковой).", personIds: ["I518", "I501"] },
+      { id: "p5", code: "МЕСТО-05", title: "город Оренбург", region: "Оренбургская область", cat: "modern", lat: 51.768, lng: 55.097, lineages: ["Щёлоковы", "Копыловы"], desc: "Областной центр. Место проживания семей Фёдора Ивановича Щёлкова, Любови Ивановны Копыловой (Щёлковой) и их потомков.", personIds: ["I578", "I570", "I488"] },
+      { id: "p6", code: "МЕСТО-06", title: "город Порхов и село Починок", region: "Псковская обл. / Ленинградская обл.", cat: "historical", lat: 57.766, lng: 29.561, lineages: ["Семёновы", "Черновы"], desc: "Родовые земли Псковско-Ленинградской ветви Семёновых. Место рождения Матрёны Иоакимовны Семёновой и проживания семьи Ольги Павловны Черновой.", personIds: ["I455", "I468", "I588"] },
+      { id: "p7", code: "МЕСТО-07", title: "город Ногинск", region: "Московская область", cat: "modern", lat: 55.856, lng: 38.441, lineages: ["Голубковы"], desc: "Место проживания ветви Голубковых — потомков Анны Павловны Голубковой (Семёновой / Шеинцевой / Крятовой).", personIds: ["I81", "I465", "I492"] },
+      { id: "p8", code: "МЕСТО-08", title: "город Набережные Челны", region: "Республика Татарстан", cat: "modern", lat: 55.743, lng: 52.408, lineages: ["Щёлоковы"], desc: "Место проживания семьи Владимира Александровича Щёлкова.", personIds: ["I474"] },
+      { id: "p9", code: "МЕСТО-09", title: "город Висагинас", region: "Литва", cat: "modern", lat: 55.602, lng: 26.435, lineages: ["Щёлоковы"], desc: "Место проживания семьи Игоря Николаевича Щёлкова и его потомков.", personIds: ["I582", "I500", "I528"] },
+      { id: "p10", code: "МЕСТО-10", title: "посёлок Первомайский", region: "Первомайский р-н, Оренбургская обл.", cat: "modern", lat: 51.884, lng: 51.651, lineages: ["Домнины", "Ерёмкины"], desc: "Районный центр. Место проживания Веры Николаевны Ерёмкиной (Домниной) и её семьи.", personIds: ["I613", "I497"] },
+      { id: "p11", code: "МЕСТО-11", title: "Таналыкский форпост / Уральск", region: "Уральское казачье войско (Южный Урал)", cat: "historical", lat: 51.233, lng: 51.373, lineages: ["Щёлоковы"], desc: "Исторический форпост военной службы яицких / уральских казаков Щёлоковых в XVIII веке.", personIds: ["I489"] }
+    ];
+
+    let leafletMapInstance = null;
+    let leafletMarkersGroup = null;
+    state.mapFilter = 'all';
+
+    function renderMapPlaces() {
+      const grid = document.getElementById('places-grid');
+      const countEl = document.getElementById('map-places-count');
+      if (!grid) return;
+
+      const filtered = MAP_PLACES.filter(p => state.mapFilter === 'all' || p.cat === state.mapFilter);
+      if (countEl) countEl.textContent = String(filtered.length);
+
+      grid.innerHTML = filtered.map(p => {
+        const lineageTags = p.lineages.map(l => '<span class="tag" style="font-size:0.75rem;">' + l + '</span>').join(' ');
+        
+        const relLinks = (p.personIds || []).map(id => {
+          const person = PERSONS.find(x => x.id === id);
+          if (!person) return '';
+          return '<button type="button" class="person-tag" onclick="event.stopPropagation();navigateTo(event, 'tree');selectPerson('' + person.id + '')">👤 ' + person.name + '</button>';
+        }).filter(Boolean).slice(0, 3).join(' ');
+
+        return '<article class="photo-card-3d" style="background:var(--surface-container-low);border:1px solid var(--outline-variant);border-radius:var(--rounded);padding:var(--space-md);display:flex;flex-direction:column;justify-content:space-between;"><div><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--space-xs);gap:var(--space-xs);"><span class="label-voice">' + p.code + '</span><div style="display:flex;gap:4px;">' + lineageTags + '</div></div><h3 style="font-family:var(--font-headline);font-size:1.15rem;margin-bottom:4px;color:var(--primary);">📍 ' + p.title + '</h3><p class="muted" style="font-size:0.85rem;margin-bottom:var(--space-xs);">' + p.region + '</p><p style="font-size:0.9rem;line-height:1.45;margin-bottom:var(--space-sm);color:var(--on-surface);">' + p.desc + '</p></div><div><div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:var(--space-sm);">' + relLinks + '</div><button type="button" class="btn btn-secondary" style="width:100%;font-size:0.85rem;padding:6px 12px;" onclick="zoomToPlace('' + p.id + '')">🎯 Показать на карте</button></div></article>';
+      }).join('');
+
+      updateLeafletMarkers();
+    }
+
+    function filterMapPoints(cat, btn) {
+      state.mapFilter = cat;
+      const tabs = document.querySelectorAll('[data-mapfilter]');
+      tabs.forEach(t => t.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+      renderMapPlaces();
+    }
+
+    function initLeafletMap() {
+      const mapBox = document.getElementById('map-leaflet');
+      if (!mapBox) return;
+
+      if (typeof L === 'undefined') {
+        mapBox.innerHTML = '<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;padding:var(--space-md);text-align:center;background:linear-gradient(135deg, var(--paper) 0%, var(--paper-deep) 100%);"><span style="font-size:2.2rem;margin-bottom:8px;">🗺️</span><strong style="color:var(--primary);font-size:1.1rem;margin-bottom:4px;">Интерактивная карта готова к просмотру</strong><p class="muted" style="font-size:0.88rem;max-width:500px;">Используйте карточки мест ниже для просмотра подробных сведений о населённых пунктах родов.</p></div>';
+        return;
+      }
+
+      if (!leafletMapInstance) {
+        leafletMapInstance = L.map('map-leaflet', {
+          center: [53.2, 49.5],
+          zoom: 6,
+          scrollWheelZoom: false
+        });
+
+        const tileHost = 'https://' + '{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+        L.tileLayer(tileHost, {
+          maxZoom: 18,
+          attribution: '&copy; OpenStreetMap'
+        }).addTo(leafletMapInstance);
+
+        leafletMarkersGroup = L.layerGroup().addTo(leafletMapInstance);
+      }
+
+      updateLeafletMarkers();
+    }
+
+    function updateLeafletMarkers() {
+      if (!leafletMapInstance || !leafletMarkersGroup || typeof L === 'undefined') return;
+
+      leafletMarkersGroup.clearLayers();
+      const filtered = MAP_PLACES.filter(p => state.mapFilter === 'all' || p.cat === state.mapFilter);
+
+      filtered.forEach(p => {
+        const marker = L.marker([p.lat, p.lng]).addTo(leafletMarkersGroup);
+        const popupContent = '<div style="font-family:sans-serif;max-width:240px;padding:4px;"><strong style="font-size:1rem;color:#6b1d2f;display:block;margin-bottom:4px;">📍 ' + p.title + '</strong><div style="font-size:0.8rem;color:#666;margin-bottom:6px;">' + p.region + '</div><p style="font-size:0.85rem;line-height:1.3;margin-bottom:8px;">' + p.desc + '</p><button type="button" onclick="navigateTo(event, 'tree')" style="background:#6b1d2f;color:#fff;border:none;padding:4px 8px;border-radius:4px;cursor:pointer;font-size:0.75rem;">🌳 Перейти в Древо</button></div>';
+        marker.bindPopup(popupContent);
+      });
+    }
+
+    function zoomToPlace(placeId) {
+      const p = MAP_PLACES.find(x => x.id === placeId);
+      if (!p) return;
+
+      const mapBox = document.getElementById('family-map-box');
+      if (mapBox) mapBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+      if (leafletMapInstance && typeof L !== 'undefined') {
+        leafletMapInstance.setView([p.lat, p.lng], 10, { animate: true });
+        if (leafletMarkersGroup) {
+          leafletMarkersGroup.eachLayer(layer => {
+            const latLng = layer.getLatLng();
+            if (Math.abs(latLng.lat - p.lat) < 0.001 && Math.abs(latLng.lng - p.lng) < 0.001) {
+              layer.openPopup();
+            }
+          });
+        }
+      }
+    }
+
 
     function openFullscreenPhoto(src, caption) {
       const modal = document.getElementById('photo-fullscreen-modal');
